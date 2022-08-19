@@ -1,0 +1,15 @@
+@import './exports/constants.scss';
+
+body,
+html {
+  background: $brand-light-blue;
+  background: -webkit-linear-gradient(
+    to bottom,
+    $brand-blue,
+    $brand-light-blue
+  );
+  background: linear-gradient(to bottom, $brand-blue, $brand-light-blue);
+  height: 100%;
+  margin: 0;
+  width: 100%;
+}

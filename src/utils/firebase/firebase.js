@@ -21,11 +21,6 @@ import {
   updateDoc
 } from 'firebase/firestore';
 
-// Classes
-
-// Exports
-import { getFirebaseTimestampFromDate } from '../../exports/functions';
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyCP36_F9MdodpI5-d4pCTJ84BLRaS3KcPQ',

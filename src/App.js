@@ -1,20 +1,21 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth
 } from './utils/firebase/firebase';
-import './App.css';
-import { selectUser, setUser } from './redux/slices/userSlice';
+import './App.scss';
+import { setUser } from './redux/slices/userSlice';
 import { Route, Routes } from 'react-router-dom';
 import { NAVIGATION_PATHS } from './exports/contants';
 import Navigation from './components/navigation/navigation';
 import Home from './routes/home/home';
+import { ProtectedNoUserRoute } from './routes/protected/protected';
+import SignIn from './routes/sign-in/sign-in';
+import SignUp from './routes/sign-up/sign-up';
 
 function App() {
   const dispatch = useDispatch();
-
-  // const user = useSelector(selectUser);
 
   // Listens for the user to sign in or out
   useEffect(() => {
@@ -33,6 +34,15 @@ function App() {
     <Routes>
       <Route path={NAVIGATION_PATHS.home} element={<Navigation />}>
         <Route index element={<Home />} />
+        <Route
+          path={NAVIGATION_PATHS.sign_in}
+          element={
+            <ProtectedNoUserRoute>
+              <SignIn />
+            </ProtectedNoUserRoute>
+          }
+        />
+        <Route path={NAVIGATION_PATHS.sign_up} element={<SignUp />} />
         <Route path="*" element={<div>Empty</div>} />
       </Route>
     </Routes>

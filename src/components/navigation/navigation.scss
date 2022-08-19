@@ -1,4 +1,10 @@
 .navbar {
+  margin: 15px 0;
+
+  .navbar-brand {
+    cursor: pointer;
+  }
+
   .avatar-dropdown-link > .dropdown-toggle::after {
     display: none !important;
   }

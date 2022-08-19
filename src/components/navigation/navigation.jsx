@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 // React Router
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 // React Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -63,31 +63,25 @@ function Navigation() {
     <Container>
       <Navbar expand="lg" sticky="top" expanded={expanded}>
         <Container>
-          <Link
-            className="navbar-link"
-            to="/"
-            onClick={() => setExpanded(false)}
+          <Navbar.Brand
+            onClick={() => {
+              setExpanded(false);
+              navigate(NAVIGATION_PATHS.home);
+            }}
           >
-            {/* <Navbar.Brand>
-              <img
+            Chat Web App
+            {/* <img
                 className="navbar-logo d-inline-block align-top"
                 alt="Caish Workshop Logo"
-              />
-            </Navbar.Brand> */}
-          </Link>
+              /> */}
+          </Navbar.Brand>
           <Navbar.Toggle
             aria-controls="basic-navbar-nav"
             onClick={() => setExpanded(expanded ? false : 'expanded')}
           />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Link
-                className="nav-link"
-                to={NAVIGATION_PATHS.home}
-                onClick={() => setExpanded(false)}
-              >
-                Test
-              </Link>
+              {/* This is needed to keep avatar on right. */}
             </Nav>
             <Nav onSelect={handleDropdownItemSelect}>
               <NavDropdown
@@ -101,13 +95,11 @@ function Navigation() {
                   />
                 }
               >
-                <NavDropdown.Item
-                  eventKey={
-                    user ? NAVIGATION_PATHS.profile : NAVIGATION_PATHS.sign_in
-                  }
-                >
-                  {user ? 'Profile' : 'Sign In'}
-                </NavDropdown.Item>
+                {!user && (
+                  <NavDropdown.Item eventKey={NAVIGATION_PATHS.sign_in}>
+                    Sign In
+                  </NavDropdown.Item>
+                )}
 
                 {user && (
                   <NavDropdown.Item
