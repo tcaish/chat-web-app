@@ -13,3 +13,10 @@ html {
   margin: 0;
   width: 100%;
 }
+
+.card-background {
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  border-radius: 15px;
+  min-height: 500px;
+}
