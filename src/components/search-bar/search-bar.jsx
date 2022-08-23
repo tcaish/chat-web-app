@@ -6,7 +6,7 @@ function SearchBar() {
   return (
     <div className="search-bar-container">
       <InputGroup>
-        <InputGroup.Text className="search-bar-input-icon">
+        <InputGroup.Text className="search-bar-input-icon-container">
           <BsSearch />
         </InputGroup.Text>
         <Form.Control
