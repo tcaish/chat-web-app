@@ -39,6 +39,7 @@ function MessageList() {
         <ul className="message-list">
           {messages.map((object, index) => (
             <MessageListItem
+              key={index}
               selectedMessage={selectedMessage}
               setSelectedMessage={setSelectedMessage}
               index={index}

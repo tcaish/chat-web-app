@@ -6,7 +6,6 @@ function MessageListItem(props) {
       className={`message-list-item-container ${
         props.selectedMessage === props.index && 'active'
       }`}
-      key={props.index}
       onClick={() => props.setSelectedMessage(props.index)}
     >
       <div className="message-content">
