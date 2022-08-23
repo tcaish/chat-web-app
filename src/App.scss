@@ -2,13 +2,19 @@
 
 body,
 html {
-  background: $brand-light-blue;
+  background: $brand-purple;
   background: -webkit-linear-gradient(
-    to bottom,
+    to right,
+    $brand-teal,
     $brand-blue,
-    $brand-light-blue
+    $brand-purple
   );
-  background: linear-gradient(to bottom, $brand-blue, $brand-light-blue);
+  background: linear-gradient(
+    to right,
+    $brand-teal,
+    $brand-blue,
+    $brand-purple
+  );
   height: 100%;
   margin: 0;
   width: 100%;
@@ -19,4 +25,5 @@ html {
   background-color: rgba(255, 255, 255, 0.4) !important;
   border-radius: 15px;
   min-height: 500px;
+  padding: 10px;
 }
