@@ -29,19 +29,20 @@
       }
 
       img {
+        background-color: white;
         border-radius: 35px;
         height: 70px;
         width: 70px;
       }
 
       span {
-        position: absolute;
-        height: 15px;
-        width: 15px;
+        border: 2.5px solid white;
         border-radius: 50%;
         bottom: 0;
+        height: 15px;
+        position: absolute;
         right: 5px;
-        border: 1.5px solid white;
+        width: 15px;
       }
     }
 

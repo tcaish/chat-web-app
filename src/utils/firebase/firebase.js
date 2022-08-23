@@ -118,23 +118,6 @@ export async function createUserDocumentFromAuth(
   return { type: 'get', data: userData.data() };
 }
 
-// Returns the items in the user's cart
-// export async function getCartProducts(userId, purchased = false) {
-//   const cartProducts = [];
-
-//   const cartRef = collection(firestore, 'users', userId, 'cart').withConverter(
-//     cartProductConverter
-//   );
-//   const q = query(cartRef, where('purchased', '==', purchased));
-//   const cartSnapshot = await getDocs(q);
-//   cartSnapshot.forEach((doc) => {
-//     const data = doc.data();
-//     data.id = doc.id;
-//     cartProducts.push(data);
-//   });
-//   return cartProducts;
-// }
-
 // Adds a product to the user's cart
 // export async function addProductToCart(
 //   color,
