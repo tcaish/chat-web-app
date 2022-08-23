@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import MessageListItem from '../message-list-item/message-list-item';
 import SearchBar from '../search-bar/search-bar';
 import './message-list.scss';
 
@@ -36,28 +37,13 @@ function MessageList() {
 
       <div className="messages-container">
         <ul className="message-list">
-          {/* picture, name, online indicator, last message (truncated) */}
           {messages.map((object, index) => (
-            <li
-              className={selectedMessage === index && 'active'}
-              key={index}
-              onClick={() => setSelectedMessage(index)}
-            >
-              <div className="message-content">
-                <div className="message-image">
-                  <img src={object.photo_url} alt="profile" />
-                  <span className={object.online ? 'online' : 'offline'}></span>
-                </div>
-                <div className="message-info">
-                  <span>{object.display_name}</span>
-                  <p className="online-text">
-                    {object.display_name.split(' ')[0]} is{' '}
-                    {object.online ? 'online' : 'offline'}
-                  </p>
-                  <p className="message-text">{object.last_message}</p>
-                </div>
-              </div>
-            </li>
+            <MessageListItem
+              selectedMessage={selectedMessage}
+              setSelectedMessage={setSelectedMessage}
+              index={index}
+              object={object}
+            />
           ))}
         </ul>
       </div>
