@@ -92,6 +92,7 @@ function Navigation() {
                     referrerPolicy="no-referrer"
                     name={displayName ? displayName : ''}
                     src={photoURL ? photoURL : ''}
+                    style={{ backgroundColor: !photoURL ? 'white' : 'none' }}
                   />
                 }
               >
