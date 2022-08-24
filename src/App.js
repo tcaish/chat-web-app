@@ -14,24 +14,24 @@ import { ProtectedNoUserRoute } from './routes/protected/protected';
 import SignIn from './routes/sign-in/sign-in';
 import SignUp from './routes/sign-up/sign-up';
 import {
+  getMessages,
+  getMessageThreads,
   getMessageThreadsForUser,
-  getMessageThreadUsersForMessageThreads,
   getUsersForMessageThreads
 } from './utils/firebase/firebase-getters';
 import {
   selectMessageThreads,
-  selectMessageThreadUsers,
+  setMessages,
   setMessageThreads,
-  setMessageThreadUsers,
-  setUsers
+  setUsersInfo
 } from './redux/slices/messagesSlice';
+import { removeItemFromArray } from './exports/functions';
 
 function App() {
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
   const messageThreads = useSelector(selectMessageThreads);
-  const messageThreadUsers = useSelector(selectMessageThreadUsers);
 
   // Listens for the user to sign in or out
   useEffect(() => {
@@ -46,38 +46,38 @@ function App() {
     });
   }, [dispatch]);
 
-  // Once user is available, get all message threads for user
+  // Get all objects in the message threads for user database table
   useEffect(() => {
     if (user) {
-      getMessageThreadsForUser(user.uid).then((res) =>
-        dispatch(setMessageThreads(res))
-      );
+      getMessageThreadsForUser(user.uid).then((res) => {
+        dispatch(setMessageThreads(res));
+      });
     }
-  }, [user, dispatch]);
-
-  // Once user is available, get all message thread user
-  useEffect(() => {
-    if (user && messageThreads.length > 0) {
-      getMessageThreadUsersForMessageThreads(user.uid, messageThreads).then(
-        (res) => dispatch(setMessageThreadUsers(res))
-      );
-    }
-  }, [user, messageThreads, dispatch]);
+  }, [user]);
 
   // Once user is available, get all user information for each message thread
   // the user is a part of.
   useEffect(() => {
-    if (user && messageThreadUsers.length > 0) {
-      const threadUsers = messageThreadUsers.reduce(
+    if (user && messageThreads.length > 0) {
+      let threadUsers = messageThreads.reduce(
         (prev, cur) => prev.concat(cur.users),
         []
       );
+      threadUsers = removeItemFromArray(threadUsers, user.uid);
 
-      getUsersForMessageThreads(threadUsers).then((res) =>
-        dispatch(setUsers(res))
-      );
+      getUsersForMessageThreads(threadUsers).then((res) => {
+        console.log(res);
+        dispatch(setUsersInfo(res));
+      });
     }
-  }, [user, messageThreadUsers, dispatch]);
+  }, [user, messageThreads]);
+
+  // Get all messages for all message threads the user is a part of
+  useEffect(() => {
+    if (user && messageThreads.length > 0) {
+      getMessages().then((res) => dispatch(setMessages(res)));
+    }
+  }, [user, messageThreads]);
 
   return (
     <Routes>

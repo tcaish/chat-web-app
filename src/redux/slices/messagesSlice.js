@@ -1,35 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  users: [],
+  usersInfo: [],
   messageThreads: [],
-  messageThreadUsers: []
+  messages: []
 };
 
 export const messagesSlice = createSlice({
   name: 'messages',
   initialState,
   reducers: {
-    setUsers: (state, action) => {
-      state.users = action.payload;
+    setUsersInfo: (state, action) => {
+      state.usersInfo = action.payload;
     },
     setMessageThreads: (state, action) => {
       state.messageThreads = action.payload;
     },
-    setMessageThreadUsers: (state, action) => {
-      state.messageThreadUsers = action.payload;
+    setMessages: (state, action) => {
+      state.messages = action.payload;
     }
   }
 });
 
 // Setters
-export const { setUsers, setMessageThreads, setMessageThreadUsers } =
+export const { setUsersInfo, setMessageThreads, setMessages } =
   messagesSlice.actions;
 
 // Selectors
-export const selectUsers = (state) => state.messages.users;
-export const selectMessageThreadUsers = (state) =>
-  state.messages.messageThreadUsers;
+export const selectUsersInfo = (state) => state.messages.usersInfo;
 export const selectMessageThreads = (state) => state.messages.messageThreads;
+export const selectMessages = (state) => state.messages.messages;
 
 export default messagesSlice.reducer;
