@@ -8,4 +8,13 @@
     display: flex;
     padding: 15px 15px;
   }
+
+  .message-view-conversation {
+    margin-top: 15px;
+
+    ul {
+      list-style: none;
+      padding-left: 15px;
+    }
+  }
 }

@@ -43,6 +43,15 @@ export function getFirebaseTimestampFromDate(date) {
   return Timestamp.fromDate(date);
 }
 
+// Returns a date formatted as mm/dd/yyyy
+export function getFormattedDate(date) {
+  let year = date.getFullYear();
+  let month = (1 + date.getMonth()).toString().padStart(2, '0');
+  let day = date.getDate().toString().padStart(2, '0');
+
+  return month + '/' + day + '/' + year;
+}
+
 // Validates a string is an email
 export const validateEmail = (email) => {
   return String(email)

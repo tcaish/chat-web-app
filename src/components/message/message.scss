@@ -1,0 +1,34 @@
+.message-container {
+  display: flex;
+  margin-bottom: 40px;
+
+  .message-image {
+    height: 40px;
+    justify-content: center;
+    width: auto;
+
+    img {
+      height: 40px;
+      width: 40px;
+    }
+  }
+
+  .message-content {
+    background-color: #82ccdd;
+    border-radius: 25px;
+    margin-bottom: auto;
+    margin-left: 10px;
+    margin-top: auto;
+    padding: 10px;
+    position: relative;
+
+    span {
+      bottom: -15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 10px;
+      left: 10px;
+      position: absolute;
+      width: 120px;
+    }
+  }
+}

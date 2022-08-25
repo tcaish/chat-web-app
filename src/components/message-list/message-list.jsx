@@ -45,9 +45,9 @@ function MessageList() {
           display_name: otherUser.display_name,
           id: m.id,
           last_message: lastMessage,
+          messages: threadMessages,
           online: otherUser.online,
-          photo_url: otherUser.photo_url,
-          total_messages: threadMessages.length
+          photo_url: otherUser.photo_url
         };
       });
       setMessageListItems(items);

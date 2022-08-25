@@ -1,3 +1,5 @@
+import { getFormattedDate } from '../exports/functions';
+
 export class Message {
   constructor(id, message, message_thread_id, sender, sent_at) {
     this.id = id;
@@ -5,6 +7,26 @@ export class Message {
     this.message_thread_id = message_thread_id;
     this.sender = sender;
     this.sent_at = sent_at;
+  }
+
+  // Returns the formatted time string
+  getFormattedDateForMessage() {
+    const sentAtDate = this.sent_at.toDate();
+    const time = sentAtDate.toLocaleTimeString('default', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+
+    const dayOfMonthToday = new Date().getDate();
+    const messageDayOfMonth = sentAtDate.getDate();
+    let textToDisplay = '';
+
+    if (dayOfMonthToday === messageDayOfMonth) textToDisplay = `${time}, Today`;
+    else if (dayOfMonthToday - 1 === messageDayOfMonth)
+      textToDisplay = `${time}, Yesterday`;
+    else textToDisplay = `${time}, ${getFormattedDate(sentAtDate)}`;
+
+    return textToDisplay;
   }
 }
 
