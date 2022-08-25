@@ -27,17 +27,22 @@ function MessageList() {
       messages.length > 0
     ) {
       const items = messageThreads.map((m) => {
+        // Gets the user that is in the message thread other than current user
         const otherUser = usersInfo.filter((i) => i.uid !== user.uid)[0];
-        const lastMessage = messages.sort(
-          (dateA, dateB) => dateB.sent_at.toDate() - dateA.sent_at.toDate()
+        // Have to do this because messages variable is immutable
+        const tempMessages = [...messages];
+        // Sorting messages in descending order
+        const sortedMessages = tempMessages.sort(
+          (msgA, msgB) => msgB.sent_at.toDate() - msgA.sent_at.toDate()
         );
-        console.log(lastMessage);
+        // Getting most recent message sent
+        const lastMessage = sortedMessages[0].message;
 
         return {
           display_name: otherUser.display_name,
           online: otherUser.online,
           photo_url: otherUser.photo_url,
-          last_message: 'test'
+          last_message: lastMessage
         };
       });
       setMessageListItems(items);
