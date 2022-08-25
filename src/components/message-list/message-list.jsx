@@ -44,9 +44,10 @@ function MessageList() {
         return {
           display_name: otherUser.display_name,
           id: m.id,
+          last_message: lastMessage,
           online: otherUser.online,
           photo_url: otherUser.photo_url,
-          last_message: lastMessage
+          total_messages: threadMessages.length
         };
       });
       setMessageListItems(items);
@@ -54,7 +55,7 @@ function MessageList() {
   }, [user, messageThreads, usersInfo, messages]);
 
   return (
-    <div className="card-background message-list-container">
+    <div className="message-list-container card-background">
       <SearchBar />
 
       <div className="messages-container">

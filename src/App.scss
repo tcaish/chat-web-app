@@ -26,3 +26,60 @@ html {
   min-height: 500px;
   padding: 10px;
 }
+
+.message-image {
+  height: 70px;
+  position: relative;
+  width: 70px;
+
+  .online {
+    background-color: #4cd137;
+  }
+
+  .offline {
+    background-color: rgb(228, 0, 0);
+  }
+
+  img {
+    background-color: white;
+    border-radius: 35px;
+    height: 70px;
+    width: 70px;
+  }
+
+  span {
+    border: 2.5px solid white;
+    border-radius: 50%;
+    bottom: 0;
+    height: 15px;
+    position: absolute;
+    right: 5px;
+    width: 15px;
+  }
+}
+
+.message-info {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 15px;
+  width: 275px;
+
+  .online-text {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 10px;
+    margin-bottom: 5px;
+  }
+
+  .message-text {
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: unset;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  span {
+    color: white;
+    font-size: 20px;
+  }
+}

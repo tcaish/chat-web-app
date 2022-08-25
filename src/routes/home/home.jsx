@@ -1,5 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 import MessageList from '../../components/message-list/message-list';
+import MessageView from '../../components/message-view/message-view';
 import './home.scss';
 
 function Home() {
@@ -10,7 +11,7 @@ function Home() {
           <MessageList />
         </Col>
         <Col>
-          <div className="card-background">Messsage</div>
+          <MessageView />
         </Col>
       </Row>
     </div>
