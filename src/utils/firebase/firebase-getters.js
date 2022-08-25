@@ -1,7 +1,6 @@
 import {
   collection,
   collectionGroup,
-  doc,
   getDocs,
   query,
   where

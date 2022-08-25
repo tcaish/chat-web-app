@@ -17,7 +17,6 @@ function MessageList() {
   const usersInfo = useSelector(selectUsersInfo);
 
   const [messageListItems, setMessageListItems] = useState([]);
-  const [selectedMessage, setSelectedMessage] = useState(0);
 
   // Sets the custom message list items to be displayed in message list
   useEffect(() => {
@@ -31,8 +30,12 @@ function MessageList() {
         const otherUser = usersInfo.filter((i) => i.uid !== user.uid)[0];
         // Have to do this because messages variable is immutable
         const tempMessages = [...messages];
+        // Get messages associated with this specific message thread
+        const threadMessages = tempMessages.filter(
+          (msg) => msg.message_thread_id === m.id
+        );
         // Sorting messages in descending order
-        const sortedMessages = tempMessages.sort(
+        const sortedMessages = threadMessages.sort(
           (msgA, msgB) => msgB.sent_at.toDate() - msgA.sent_at.toDate()
         );
         // Getting most recent message sent
@@ -40,6 +43,7 @@ function MessageList() {
 
         return {
           display_name: otherUser.display_name,
+          id: m.id,
           online: otherUser.online,
           photo_url: otherUser.photo_url,
           last_message: lastMessage
@@ -56,13 +60,7 @@ function MessageList() {
       <div className="messages-container">
         <ul className="message-list">
           {messageListItems.map((item, index) => (
-            <MessageListItem
-              key={index}
-              selectedMessage={selectedMessage}
-              setSelectedMessage={setSelectedMessage}
-              index={index}
-              item={item}
-            />
+            <MessageListItem key={index} index={index} item={item} />
           ))}
         </ul>
       </div>

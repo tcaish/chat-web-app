@@ -1,12 +1,21 @@
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectSelectedMessageThread,
+  setSelectedMessageThread
+} from '../../redux/slices/messagesSlice';
 import './message-list-item.scss';
 
 function MessageListItem(props) {
+  const dispatch = useDispatch();
+
+  const selectedMessageThread = useSelector(selectSelectedMessageThread);
+
   return (
     <li
       className={`message-list-item-container ${
-        props.selectedMessage === props.index && 'active'
+        selectedMessageThread === props.item.id && 'active'
       }`}
-      onClick={() => props.setSelectedMessage(props.index)}
+      onClick={() => dispatch(setSelectedMessageThread(props.item.id))}
     >
       <div className="message-content">
         <div className="message-image">

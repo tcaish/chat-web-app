@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   usersInfo: [],
   messageThreads: [],
-  messages: []
+  messages: [],
+  selectedMessageThread: null
 };
 
 export const messagesSlice = createSlice({
@@ -18,17 +19,26 @@ export const messagesSlice = createSlice({
     },
     setMessages: (state, action) => {
       state.messages = action.payload;
+    },
+    setSelectedMessageThread: (state, action) => {
+      state.selectedMessageThread = action.payload;
     }
   }
 });
 
 // Setters
-export const { setUsersInfo, setMessageThreads, setMessages } =
-  messagesSlice.actions;
+export const {
+  setUsersInfo,
+  setMessageThreads,
+  setMessages,
+  setSelectedMessageThread
+} = messagesSlice.actions;
 
 // Selectors
 export const selectUsersInfo = (state) => state.messages.usersInfo;
 export const selectMessageThreads = (state) => state.messages.messageThreads;
 export const selectMessages = (state) => state.messages.messages;
+export const selectSelectedMessageThread = (state) =>
+  state.messages.selectedMessageThread;
 
 export default messagesSlice.reducer;

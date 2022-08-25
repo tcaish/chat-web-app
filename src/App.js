@@ -15,7 +15,6 @@ import SignIn from './routes/sign-in/sign-in';
 import SignUp from './routes/sign-up/sign-up';
 import {
   getMessages,
-  getMessageThreads,
   getMessageThreadsForUser,
   getUsersForMessageThreads
 } from './utils/firebase/firebase-getters';
@@ -53,6 +52,7 @@ function App() {
         dispatch(setMessageThreads(res));
       });
     }
+    // eslint-disable-next-line
   }, [user]);
 
   // Once user is available, get all user information for each message thread
@@ -66,10 +66,10 @@ function App() {
       threadUsers = removeItemFromArray(threadUsers, user.uid);
 
       getUsersForMessageThreads(threadUsers).then((res) => {
-        console.log(res);
         dispatch(setUsersInfo(res));
       });
     }
+    // eslint-disable-next-line
   }, [user, messageThreads]);
 
   // Get all messages for all message threads the user is a part of
@@ -77,6 +77,7 @@ function App() {
     if (user && messageThreads.length > 0) {
       getMessages().then((res) => dispatch(setMessages(res)));
     }
+    // eslint-disable-next-line
   }, [user, messageThreads]);
 
   return (
