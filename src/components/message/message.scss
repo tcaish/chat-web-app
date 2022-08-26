@@ -1,3 +1,10 @@
+.message-container-left-aligned {
+  justify-content: flex-start;
+}
+.message-container-right-aligned {
+  justify-content: flex-end;
+}
+
 .message-container {
   display: flex;
   margin-bottom: 40px;
@@ -13,22 +20,33 @@
     }
   }
 
-  .message-content {
+  .message-content-left-aligned {
+    background-color: #78e08f;
+  }
+  .message-content-right-aligned {
     background-color: #82ccdd;
+  }
+
+  .message-content {
     border-radius: 25px;
-    margin-bottom: auto;
-    margin-left: 10px;
-    margin-top: auto;
+    margin: auto 10px;
+    max-width: 420px;
     padding: 10px;
     position: relative;
 
-    span {
+    .message-content-time {
       bottom: -15px;
       color: rgba(255, 255, 255, 0.5);
       font-size: 10px;
-      left: 10px;
       position: absolute;
       width: 120px;
+    }
+
+    .message-content-time-left-aligned {
+      left: 10px;
+    }
+    .message-content-time-right-aligned {
+      right: 0;
     }
   }
 }
