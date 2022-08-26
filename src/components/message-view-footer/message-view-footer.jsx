@@ -8,6 +8,18 @@ function MessageViewFooter({
   sendMessage,
   sendingMessage
 }) {
+  // const handleShiftEnter = (event) => {
+  //   if (event.keyCode === 13 && event.shiftKey) {
+  //     if (event.type === 'keydown') {
+  //       sendMessage(inputText);
+  //     }
+  //   }
+  // };
+
+  // const textarea = document.querySelector('textarea');
+  // console.log(textarea);
+  // textarea.addEventListener('keydown', handleShiftEnter);
+
   return (
     <div className="message-view-footer-container">
       <div className="message-view-footer-input-container">

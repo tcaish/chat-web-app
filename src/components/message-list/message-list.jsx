@@ -38,17 +38,22 @@ function MessageList() {
         const sortedMessages = threadMessages.sort(
           (msgA, msgB) => msgB.sent_at.toDate() - msgA.sent_at.toDate()
         );
-        // Getting most recent message sent
-        const lastMessage = sortedMessages[0].message;
 
-        return {
-          display_name: otherUser.display_name,
-          id: m.id,
-          last_message: lastMessage,
-          messages: threadMessages,
-          online: otherUser.online,
-          photo_url: otherUser.photo_url
-        };
+        if (sortedMessages.length > 0) {
+          // Getting most recent message sent
+          const lastMessage = sortedMessages[0].message;
+
+          return {
+            display_name: otherUser.display_name,
+            id: m.id,
+            last_message: lastMessage,
+            messages: threadMessages,
+            online: otherUser.online,
+            photo_url: otherUser.photo_url
+          };
+        }
+
+        return {};
       });
       setMessageListItems(items);
     }

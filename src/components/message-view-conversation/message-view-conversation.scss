@@ -1,6 +1,10 @@
 .message-view-conversation-container {
-  min-height: 365px;
+  height: 365px;
   margin-top: 15px;
+  min-height: 365px;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-gutter: stable;
 
   ul {
     list-style: none;
