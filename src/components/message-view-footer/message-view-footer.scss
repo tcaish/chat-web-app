@@ -1,0 +1,50 @@
+.message-view-footer-container {
+  padding: 20px;
+  width: 100%;
+
+  .message-view-footer-input-container {
+    border-radius: 15px 15px;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+
+    .message-view-footer-input {
+      border: 0;
+      border-color: unset;
+      border-radius: 15px 0 0 15px;
+      background-color: rgba(0, 0, 0, 0.3);
+      caret-color: white;
+      color: white;
+      font-size: 15px;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    .message-view-footer-send-container {
+      border-radius: 0 15px 15px 0;
+      display: flex;
+      width: 70px;
+
+      &:hover {
+        background-color: rgb(255, 255, 255, 0.1);
+        cursor: pointer;
+        opacity: 0.7;
+      }
+
+      .send-button {
+        align-items: center;
+        color: white;
+        display: flex;
+        font-size: 30px;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+
+        circle {
+          stroke: white;
+        }
+      }
+    }
+  }
+}

@@ -1,49 +1,37 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectSelectedMessageListItem } from '../../redux/slices/messagesSlice';
-import Message from '../message/message';
+import MessageViewConversation from '../message-view-conversation/message-view-conversation';
+import MessageViewFooter from '../message-view-footer/message-view-footer';
+import MessageViewHeader from '../message-view-header/message-view-header';
 import './message-view.scss';
 
 function MessageView() {
   const selectedMessageListItem = useSelector(selectSelectedMessageListItem);
 
+  const [sendingMessage, setSendingMessage] = useState(false);
+
+  // Sends the message
+  async function sendMessage(inputText) {
+    if (sendingMessage || !inputText) return;
+
+    setSendingMessage(true);
+  }
+
   return (
     <div className="message-view-container card-background">
       {selectedMessageListItem ? (
         <>
-          <div className="message-view-header">
-            <div className="message-image">
-              <img src={selectedMessageListItem.photo_url} alt="profile" />
-              <span
-                className={
-                  selectedMessageListItem.online ? 'online' : 'offline'
-                }
-              ></span>
-            </div>
-            <div className="message-info">
-              <span>
-                Conversation with {selectedMessageListItem.display_name}
-              </span>
-              <p className="online-text">
-                {selectedMessageListItem.messages.length}{' '}
-                {selectedMessageListItem.messages.length === 1
-                  ? 'message'
-                  : 'messages'}
-              </p>
-            </div>
-          </div>
-          <div className="message-view-conversation">
-            <ul>
-              {[...selectedMessageListItem.messages]
-                .sort(
-                  (msgA, msgB) => msgA.sent_at.toDate() - msgB.sent_at.toDate()
-                )
-                .map((msg, index) => (
-                  <li key={index}>
-                    <Message message={msg} />
-                  </li>
-                ))}
-            </ul>
-          </div>
+          <MessageViewHeader
+            selectedMessageListItem={selectedMessageListItem}
+          />
+          <MessageViewConversation
+            selectedMessageListItem={selectedMessageListItem}
+          />
+          <MessageViewFooter
+            sendMessage={sendMessage}
+            sendingMessage={sendingMessage}
+          />
         </>
       ) : (
         <div>Empty message view</div>
