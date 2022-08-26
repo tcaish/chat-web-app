@@ -118,43 +118,6 @@ export async function createUserDocumentFromAuth(
   return { type: 'get', data: userData.data() };
 }
 
-// Adds a product to the user's cart
-// export async function addProductToCart(
-//   color,
-//   notes,
-//   product,
-//   quantity,
-//   userId
-// ) {
-//   if (!color || !product || !quantity || !userId) return;
-
-//   const cartRef = collection(firestore, 'users', userId, 'cart');
-
-//   const q = query(
-//     cartRef,
-//     where('product', '==', product),
-//     where('purchased', '==', false)
-//   );
-//   const querySnapshot = await getDocs(q);
-
-//   // If the cart item already exists
-//   if (!querySnapshot.empty) return { added: false, error: 'already-exists' };
-
-//   return await addDoc(cartRef, {
-//     color,
-//     notes,
-//     product,
-//     quantity,
-//     purchased: false
-//   })
-//     .then((res) => {
-//       return { added: true, error: '' };
-//     })
-//     .catch((err) => {
-//       return { added: false, error: err.code };
-//     });
-// }
-
 // export async function editUserRating(rating, ratingId, userId, productId) {
 //   if (!rating || !ratingId || !userId || !productId) return;
 

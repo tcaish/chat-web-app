@@ -21,7 +21,7 @@ function Message({ message }) {
     }
   }, [user, message.sender, usersInfo]);
 
-  return isUsersMessage ? (
+  return !isUsersMessage ? (
     <div className="message-container message-container-left-aligned">
       {photoURL && (
         <>

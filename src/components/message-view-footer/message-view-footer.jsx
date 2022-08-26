@@ -1,11 +1,13 @@
 import { Spinner, Textarea } from 'evergreen-ui';
-import { useState } from 'react';
 import { IoMdSend } from 'react-icons/io';
 import './message-view-footer.scss';
 
-function MessageViewFooter({ sendMessage, sendingMessage }) {
-  const [inputText, setInputText] = useState('');
-
+function MessageViewFooter({
+  inputText,
+  setInputText,
+  sendMessage,
+  sendingMessage
+}) {
   return (
     <div className="message-view-footer-container">
       <div className="message-view-footer-input-container">
