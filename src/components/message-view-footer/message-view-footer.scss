@@ -1,5 +1,5 @@
 .message-view-footer-container {
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   width: 100%;
 
   .message-view-footer-input-container {
@@ -44,6 +44,21 @@
         circle {
           stroke: white;
         }
+      }
+    }
+  }
+
+  .message-view-footer-message-container {
+    padding-left: 7px;
+    padding-top: 5px;
+
+    p {
+      font-size: 10px;
+      margin-bottom: 0;
+
+      strong {
+        background-color: rgb(255, 255, 255, 0.3);
+        font-size: 10px;
       }
     }
   }
