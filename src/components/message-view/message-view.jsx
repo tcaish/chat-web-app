@@ -16,6 +16,7 @@ import MessageViewConversation from '../message-view-conversation/message-view-c
 import MessageViewFooter from '../message-view-footer/message-view-footer';
 import MessageViewHeader from '../message-view-header/message-view-header';
 import './message-view.scss';
+import EmptyState from '../empty-state/empty-state';
 
 function MessageView() {
   const dispatch = useDispatch();
@@ -126,7 +127,7 @@ function MessageView() {
           />
         </>
       ) : (
-        <div>Empty message view</div>
+        <EmptyState />
       )}
     </div>
   );
