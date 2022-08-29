@@ -1,7 +1,8 @@
 # Chat Web App - A React Chat Web Application
 
 ## Demo
-# [https://caishworkshop.netlify.app](https://caishworkshop.netlify.app)
+Update the link here
+[https://caishworkshop.netlify.app](https://caishworkshop.netlify.app)
 
 ### Testing strategy
 In order to fully try out the website, you'll need to create an account. You can search for "Test Dummy" to test out sending messages in a conversation, but if you would like to see what it's like to send a receive messages with another person, have someone else create a new account and start a conversation with you.
