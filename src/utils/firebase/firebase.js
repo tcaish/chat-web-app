@@ -118,31 +118,6 @@ export async function createUserDocumentFromAuth(
   return { type: 'get', data: userData.data() };
 }
 
-// export async function editUserRating(rating, ratingId, userId, productId) {
-//   if (!rating || !ratingId || !userId || !productId) return;
-
-//   const ratingRef = doc(firestore, 'ratings', ratingId);
-
-//   // If rating exists for user for given product
-//   if (!ratingRef.empty) {
-//     const createdAt = getFirebaseTimestampFromDate(new Date());
-
-//     try {
-//       return await updateDoc(ratingRef, {
-//         rating,
-//         submitted: createdAt
-//       })
-//         .then((res) => true)
-//         .catch((err) => null);
-//     } catch (err) {
-//       console.log(err);
-//       return null;
-//     }
-//   } else {
-//     return null;
-//   }
-// }
-
 // Removes an item from the user's cart
 // export async function removeCartItem(userId, cartProductId) {
 //   if (!userId || !cartProductId) return;

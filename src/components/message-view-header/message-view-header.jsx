@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { selectSelectedMessageUserOnline } from '../../redux/slices/messagesSlice';
 import './message-view-header.scss';
 
-function MessageViewHeader({ selectedMessageListItem }) {
+function MessageViewHeader({ selectedMessageListItem, totalMessages }) {
   const selectedMessageUserOnline = useSelector(
     selectSelectedMessageUserOnline
   );
@@ -18,10 +18,7 @@ function MessageViewHeader({ selectedMessageListItem }) {
       <div className="message-info">
         <span>Conversation with {selectedMessageListItem.display_name}</span>
         <p className="sub-text">
-          {selectedMessageListItem.messages.length}{' '}
-          {selectedMessageListItem.messages.length === 1
-            ? 'message'
-            : 'messages'}
+          {totalMessages} {totalMessages === 1 ? 'message' : 'messages'}
         </p>
       </div>
     </div>

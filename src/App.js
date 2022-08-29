@@ -38,7 +38,11 @@ function App() {
   useEffect(() => {
     onAuthStateChangedListener((user) => {
       if (user) {
-        createUserDocumentFromAuth(user);
+        createUserDocumentFromAuth(user, {
+          online: true,
+          photo_url: user.photoURL ? user.photoURL : '',
+          uid: user.uid
+        });
         dispatch(setUser(user));
         sessionStorage.setItem('Auth Token', user.refreshToken);
       } else {
@@ -59,7 +63,7 @@ function App() {
 
   // Once user is available, get all user information for each message thread
   // the user is a part of and listen for updates to their user information,
-  // like if their online or their photo changes.
+  // like if they are online or their photo changes.
   useEffect(() => {
     if (user && messageThreads.length > 0) {
       let threadUsers = messageThreads.reduce(

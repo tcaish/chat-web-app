@@ -27,6 +27,37 @@ export const messagesSlice = createSlice({
       state.selectedMessageThread = action.payload;
     },
     setSelectedMessageListItem: (state, action) => {
+      // const display_name = action.payload.display_name
+      //   ? action.payload.display_name
+      //   : state.selectedMessageListItem.display_name;
+      // const id = action.payload.id
+      //   ? action.payload.id
+      //   : state.selectedMessageListItem.id;
+      // const last_message = action.payload.last_message
+      //   ? action.payload.last_message
+      //   : state.selectedMessageListItem.last_message;
+      // const messages = action.payload.messages
+      //   ? action.payload.messages
+      //   : state.selectedMessageListItem.messages;
+      // const online = action.payload.online
+      //   ? action.payload.online
+      //   : state.selectedMessageListItem.online;
+      // const photo_url = action.payload.photo_url
+      //   ? action.payload.photo_url
+      //   : state.selectedMessageListItem.photo_url;
+      // const user_uid = action.payload.user_uid
+      //   ? action.payload.user_uid
+      //   : state.selectedMessageListItem.user_uid;
+
+      // state.selectedMessageListItem = {
+      //   display_name,
+      //   id,
+      //   last_message,
+      //   messages,
+      //   online,
+      //   photo_url,
+      //   user_uid
+      // };
       state.selectedMessageListItem = action.payload;
     },
     setSelectedMessageUserOnline: (state, action) => {

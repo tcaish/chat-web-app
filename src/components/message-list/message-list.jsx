@@ -27,7 +27,8 @@ function MessageList() {
     ) {
       const items = messageThreads.map((m) => {
         // Gets the user that is in the message thread other than current user
-        const otherUser = usersInfo.filter((i) => i.uid !== user.uid)[0];
+        const otherUserUid = m.users.filter((u) => u !== user.uid)[0];
+        const otherUser = usersInfo.filter((i) => i.uid === otherUserUid)[0];
 
         if (otherUser) {
           // Have to do this because messages variable is immutable
@@ -41,20 +42,16 @@ function MessageList() {
             (msgA, msgB) => msgB.sent_at.toDate() - msgA.sent_at.toDate()
           );
 
-          if (sortedMessages.length > 0) {
-            // Getting most recent message sent
-            const lastMessage = sortedMessages[0].message;
-
-            return {
-              display_name: otherUser.display_name,
-              id: m.id,
-              last_message: lastMessage,
-              messages: threadMessages,
-              online: otherUser.online,
-              photo_url: otherUser.photo_url,
-              user_uid: otherUser.uid
-            };
-          }
+          return {
+            display_name: otherUser.display_name,
+            id: m.id,
+            last_message:
+              sortedMessages.length > 0 ? sortedMessages[0].message : '',
+            messages: threadMessages,
+            online: otherUser.online,
+            photo_url: otherUser.photo_url,
+            user_uid: otherUser.uid
+          };
         }
 
         return {};

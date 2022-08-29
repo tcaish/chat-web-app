@@ -1,62 +1,16 @@
-import { collection, doc, onSnapshot, query } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { messageConverter } from '../../classes/Message';
-import {
-  selectMessages,
-  setMessages,
-  setSelectedMessageUserTyping
-} from '../../redux/slices/messagesSlice';
+import { setSelectedMessageUserTyping } from '../../redux/slices/messagesSlice';
 import { selectUser } from '../../redux/slices/userSlice';
 import { firestore } from '../../utils/firebase/firebase';
 import Message from '../message/message';
 import './message-view-conversation.scss';
 
-function MessageViewConversation({ selectedMessageListItem }) {
+function MessageViewConversation({ selectedMessageListItem, threadMessages }) {
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
-  const messages = useSelector(selectMessages);
-
-  const [threadMessages, setThreadMessages] = useState([]);
-
-  // Listen for new messages in the message thread
-  useEffect(() => {
-    const q = query(
-      collection(
-        firestore,
-        'message_threads',
-        selectedMessageListItem.id,
-        'messages'
-      ).withConverter(messageConverter)
-    );
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const tempMessages = [];
-
-      querySnapshot.forEach((doc) => {
-        let data = doc.data();
-        data.id = doc.id;
-        tempMessages.push(data);
-      });
-
-      setThreadMessages(tempMessages);
-
-      querySnapshot.docChanges().forEach((change) => {
-        if (change.type === 'added') {
-          let data = change.doc.data();
-          data.id = change.doc.id;
-
-          const newMessages = [...messages, data];
-          dispatch(setMessages(newMessages));
-        }
-      });
-    });
-
-    return () => {
-      unsubscribe();
-    };
-    // eslint-disable-next-line
-  }, [selectedMessageListItem.id]);
 
   // Listen for the other user in the message thread typing
   useEffect(() => {
