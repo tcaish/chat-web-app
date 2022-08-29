@@ -5,7 +5,8 @@ const initialState = {
   messageThreads: [],
   messages: [],
   selectedMessageThread: null,
-  selectedMessageListItem: null
+  selectedMessageListItem: null,
+  selectedMessageUserOnline: false
 };
 
 export const messagesSlice = createSlice({
@@ -26,6 +27,9 @@ export const messagesSlice = createSlice({
     },
     setSelectedMessageListItem: (state, action) => {
       state.selectedMessageListItem = action.payload;
+    },
+    setSelectedMessageUserOnline: (state, action) => {
+      state.selectedMessageUserOnline = action.payload;
     }
   }
 });
@@ -36,7 +40,8 @@ export const {
   setMessageThreads,
   setMessages,
   setSelectedMessageThread,
-  setSelectedMessageListItem
+  setSelectedMessageListItem,
+  setSelectedMessageUserOnline
 } = messagesSlice.actions;
 
 // Selectors
@@ -47,5 +52,7 @@ export const selectSelectedMessageThread = (state) =>
   state.messages.selectedMessageThread;
 export const selectSelectedMessageListItem = (state) =>
   state.messages.selectedMessageListItem;
+export const selectSelectedMessageUserOnline = (state) =>
+  state.messages.selectedMessageUserOnline;
 
 export default messagesSlice.reducer;

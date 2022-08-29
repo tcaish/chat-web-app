@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectSelectedMessageThread,
   setSelectedMessageListItem,
-  setSelectedMessageThread
+  setSelectedMessageThread,
+  setSelectedMessageUserOnline
 } from '../../redux/slices/messagesSlice';
 import './message-list-item.scss';
 
@@ -10,6 +12,11 @@ function MessageListItem(props) {
   const dispatch = useDispatch();
 
   const selectedMessageThread = useSelector(selectSelectedMessageThread);
+
+  useEffect(() => {
+    dispatch(setSelectedMessageUserOnline(props.item.online));
+    // eslint-disable-next-line
+  }, [props.item.online]);
 
   return (
     Object.keys(props.item).length > 0 && (
@@ -29,7 +36,7 @@ function MessageListItem(props) {
           </div>
           <div className="message-info">
             <span>{props.item.display_name}</span>
-            <p className="online-text">
+            <p className="sub-text">
               {props.item.display_name && props.item.display_name.split(' ')[0]}{' '}
               is {props.item.online ? 'online' : 'offline'}
             </p>

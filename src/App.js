@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   onAuthStateChangedListener,
-  createUserDocumentFromAuth
+  createUserDocumentFromAuth,
+  firestore
 } from './utils/firebase/firebase';
 import './App.scss';
 import { selectUser, setUser } from './redux/slices/userSlice';
@@ -15,8 +16,7 @@ import SignIn from './routes/sign-in/sign-in';
 import SignUp from './routes/sign-up/sign-up';
 import {
   getMessages,
-  getMessageThreadsForUser,
-  getUsersForMessageThreads
+  getMessageThreadsForUser
 } from './utils/firebase/firebase-getters';
 import {
   selectMessageThreads,
@@ -25,6 +25,8 @@ import {
   setUsersInfo
 } from './redux/slices/messagesSlice';
 import { removeItemFromArray } from './exports/functions';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { userConverter } from './classes/User';
 
 function App() {
   const dispatch = useDispatch();
@@ -56,7 +58,8 @@ function App() {
   }, [user]);
 
   // Once user is available, get all user information for each message thread
-  // the user is a part of.
+  // the user is a part of and listen for updates to their user information,
+  // like if their online or their photo changes.
   useEffect(() => {
     if (user && messageThreads.length > 0) {
       let threadUsers = messageThreads.reduce(
@@ -65,9 +68,23 @@ function App() {
       );
       threadUsers = removeItemFromArray(threadUsers, user.uid);
 
-      getUsersForMessageThreads(threadUsers).then((res) => {
-        dispatch(setUsersInfo(res));
+      const q = query(
+        collection(firestore, 'users').withConverter(userConverter),
+        where('uid', 'in', threadUsers)
+      );
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const usersList = [];
+
+        querySnapshot.forEach((doc) => {
+          usersList.push(doc.data());
+        });
+
+        dispatch(setUsersInfo(usersList));
       });
+
+      return () => {
+        unsubscribe();
+      };
     }
     // eslint-disable-next-line
   }, [user, messageThreads]);
