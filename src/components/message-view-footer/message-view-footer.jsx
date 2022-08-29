@@ -1,5 +1,7 @@
 import { Badge, Spinner, Textarea } from 'evergreen-ui';
 import { IoMdSend } from 'react-icons/io';
+import { useSelector } from 'react-redux';
+import { selectSelectedMessageUserTyping } from '../../redux/slices/messagesSlice';
 import './message-view-footer.scss';
 
 function MessageViewFooter({
@@ -8,8 +10,17 @@ function MessageViewFooter({
   sendMessage,
   sendingMessage
 }) {
+  const selectedMessageUserTyping = useSelector(
+    selectSelectedMessageUserTyping
+  );
+
   return (
     <div className="message-view-footer-container">
+      <div className="message-view-footer-typing-container  message-view-footer-text">
+        {selectedMessageUserTyping && (
+          <p>{selectedMessageUserTyping} is typing...</p>
+        )}
+      </div>
       <div className="message-view-footer-input-container">
         <Textarea
           className="message-view-footer-input"
@@ -35,7 +46,7 @@ function MessageViewFooter({
           </span>
         </div>
       </div>
-      <div className="message-view-footer-message-container">
+      <div className="message-view-footer-message-container message-view-footer-text">
         <p>
           <Badge color="neutral" marginRight={6}>
             Shift

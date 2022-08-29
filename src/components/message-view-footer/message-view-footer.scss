@@ -48,18 +48,31 @@
     }
   }
 
-  .message-view-footer-message-container {
+  .message-view-footer-text {
     padding-left: 7px;
     padding-top: 5px;
 
     p {
       font-size: 10px;
-      margin-bottom: 0;
+    }
+  }
 
-      strong {
-        background-color: rgb(255, 255, 255, 0.3);
-        font-size: 10px;
-      }
+  .message-view-footer-typing-container {
+    min-height: 25px;
+
+    p {
+      color: white;
+    }
+  }
+
+  .message-view-footer-message-container {
+    p {
+      margin-bottom: 5px;
+    }
+
+    strong {
+      background-color: rgb(255, 255, 255, 0.3);
+      font-size: 10px;
     }
   }
 }

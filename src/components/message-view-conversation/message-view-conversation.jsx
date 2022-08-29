@@ -1,8 +1,13 @@
-import { collection, onSnapshot, query } from 'firebase/firestore';
+import { collection, doc, onSnapshot, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { messageConverter } from '../../classes/Message';
-import { selectMessages, setMessages } from '../../redux/slices/messagesSlice';
+import {
+  selectMessages,
+  setMessages,
+  setSelectedMessageUserTyping
+} from '../../redux/slices/messagesSlice';
+import { selectUser } from '../../redux/slices/userSlice';
 import { firestore } from '../../utils/firebase/firebase';
 import Message from '../message/message';
 import './message-view-conversation.scss';
@@ -10,6 +15,7 @@ import './message-view-conversation.scss';
 function MessageViewConversation({ selectedMessageListItem }) {
   const dispatch = useDispatch();
 
+  const user = useSelector(selectUser);
   const messages = useSelector(selectMessages);
 
   const [threadMessages, setThreadMessages] = useState([]);
@@ -51,6 +57,28 @@ function MessageViewConversation({ selectedMessageListItem }) {
     };
     // eslint-disable-next-line
   }, [selectedMessageListItem.id]);
+
+  // Listen for the other user in the message thread typing
+  useEffect(() => {
+    const q = doc(firestore, 'message_threads', selectedMessageListItem.id);
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const data = querySnapshot.data();
+      const isOtherUserTyping = data.typing.includes(
+        selectedMessageListItem.user_uid
+      );
+
+      dispatch(
+        setSelectedMessageUserTyping(
+          isOtherUserTyping ? selectedMessageListItem.display_name : ''
+        )
+      );
+    });
+
+    return () => {
+      unsubscribe();
+    };
+    // eslint-disable-next-line
+  }, [selectedMessageListItem.id, user]);
 
   // Scroll to bottom of message list
   useEffect(() => {

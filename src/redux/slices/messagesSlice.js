@@ -6,7 +6,8 @@ const initialState = {
   messages: [],
   selectedMessageThread: null,
   selectedMessageListItem: null,
-  selectedMessageUserOnline: false
+  selectedMessageUserOnline: false,
+  selectedMessageUserTyping: ''
 };
 
 export const messagesSlice = createSlice({
@@ -30,6 +31,9 @@ export const messagesSlice = createSlice({
     },
     setSelectedMessageUserOnline: (state, action) => {
       state.selectedMessageUserOnline = action.payload;
+    },
+    setSelectedMessageUserTyping: (state, action) => {
+      state.selectedMessageUserTyping = action.payload;
     }
   }
 });
@@ -41,7 +45,8 @@ export const {
   setMessages,
   setSelectedMessageThread,
   setSelectedMessageListItem,
-  setSelectedMessageUserOnline
+  setSelectedMessageUserOnline,
+  setSelectedMessageUserTyping
 } = messagesSlice.actions;
 
 // Selectors
@@ -54,5 +59,7 @@ export const selectSelectedMessageListItem = (state) =>
   state.messages.selectedMessageListItem;
 export const selectSelectedMessageUserOnline = (state) =>
   state.messages.selectedMessageUserOnline;
+export const selectSelectedMessageUserTyping = (state) =>
+  state.messages.selectedMessageUserTyping;
 
 export default messagesSlice.reducer;
