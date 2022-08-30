@@ -6,8 +6,10 @@ import {
   selectUsersInfo
 } from '../../redux/slices/messagesSlice';
 import { selectUser } from '../../redux/slices/userSlice';
+import EmptyState from '../empty-state/empty-state';
 import MessageListItem from '../message-list-item/message-list-item';
 import SearchBar from '../search-bar/search-bar';
+import { MdFormatListBulleted } from 'react-icons/md';
 import './message-list.scss';
 
 function MessageList() {
@@ -64,13 +66,22 @@ function MessageList() {
     <div className="message-list-container card-background">
       <SearchBar />
 
-      <div className="messages-container">
-        <ul className="message-list">
-          {messageListItems.map((item, index) => (
-            <MessageListItem key={index} index={index} item={item} />
-          ))}
-        </ul>
-      </div>
+      {messageListItems.length > 0 ? (
+        <div className="messages-container">
+          <ul className="message-list">
+            {messageListItems.map((item, index) => (
+              <MessageListItem key={index} index={index} item={item} />
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <EmptyState
+          title={'No Messages'}
+          description={'Start a new message above to get started!'}
+          icon={<MdFormatListBulleted />}
+          containerPadding={{ padding: '40% 20px 20px 20px' }}
+        />
+      )}
     </div>
   );
 }

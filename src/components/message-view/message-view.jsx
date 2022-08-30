@@ -17,6 +17,7 @@ import MessageViewFooter from '../message-view-footer/message-view-footer';
 import MessageViewHeader from '../message-view-header/message-view-header';
 import './message-view.scss';
 import EmptyState from '../empty-state/empty-state';
+import { MdMessage } from 'react-icons/md';
 
 function MessageView() {
   const dispatch = useDispatch();
@@ -127,7 +128,14 @@ function MessageView() {
           />
         </>
       ) : (
-        <EmptyState />
+        <EmptyState
+          title={'No Conversation to Display'}
+          description={
+            'Select a message from the left to pick up from a previous conversation or start a new one!'
+          }
+          icon={<MdMessage />}
+          containerPadding={{ padding: '25% 20px 20px 20px' }}
+        />
       )}
     </div>
   );
