@@ -34,3 +34,21 @@ export async function editMessageThreadUsersTyping(
     return null;
   }
 }
+
+// Sets the user online or not
+export async function editUserOnline(userId, isOnline = false) {
+  if (!userId) return;
+
+  const userRef = doc(firestore, 'users', userId);
+
+  try {
+    return await updateDoc(userRef, {
+      online: isOnline
+    })
+      .then((res) => true)
+      .catch((err) => null);
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+}

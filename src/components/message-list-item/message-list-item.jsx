@@ -16,7 +16,7 @@ function MessageListItem(props) {
   useEffect(() => {
     dispatch(setSelectedMessageUserOnline(props.item.online));
     // eslint-disable-next-line
-  }, [props.item.online, props.item.messages.length]);
+  }, [props.item.online]);
 
   return (
     Object.keys(props.item).length > 0 && (

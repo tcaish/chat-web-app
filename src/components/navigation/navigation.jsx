@@ -30,6 +30,7 @@ import { NAVIGATION_PATHS } from '../../exports/contants';
 // Styles
 import './navigation.scss';
 import './navigation.mobile.scss';
+import { editUserOnline } from '../../utils/firebase/firebase-modifiers';
 
 function Navigation() {
   const navigate = useNavigate();
@@ -51,6 +52,8 @@ function Navigation() {
   async function handleSigningOut() {
     await signOutUser()
       .then((res) => {
+        editUserOnline(user.uid, false);
+
         setExpanded(false);
         dispatch(setUser(null));
       })

@@ -1,4 +1,5 @@
 import { Timestamp } from 'firebase/firestore';
+import { editUserOnline } from '../utils/firebase/firebase-modifiers';
 
 // Signing in and out
 export function handleSignInUpErrors(err) {
@@ -68,4 +69,35 @@ export function removeItemFromArray(arr, value) {
     arr.splice(index, 1);
   }
   return arr;
+}
+
+let time;
+
+// Listens for inactivity from the user and sets the user online/offline
+// accordingly.
+export async function listenForUserInactive(userUid) {
+  window.onload = resetTimer;
+  document.onmousemove = resetTimer;
+  document.onkeydown = resetTimer;
+
+  // Sets the user online/offline
+  async function setUserOnline(isOnline) {
+    await editUserOnline(userUid, isOnline);
+  }
+
+  // Sets user online and resets the timer
+  async function resetTimer() {
+    await setUserOnline(true);
+
+    clearTimeout(time);
+    time = setTimeout(() => setUserOnline(false), 30000);
+  }
+}
+
+// Stops listening for inactivity from the user
+export function stopListeningForUserInactive() {
+  window.onload = null;
+  document.onmousemove = null;
+  document.onkeydown = null;
+  clearTimeout(time);
 }
