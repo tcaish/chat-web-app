@@ -23,6 +23,7 @@ import {
 } from './utils/firebase/firebase-getters';
 import {
   selectMessageThreads,
+  setLoading,
   setMessages,
   setMessageThreads,
   setUsersInfo
@@ -65,6 +66,8 @@ function App() {
   // Get all objects in the message threads for user database table
   useEffect(() => {
     if (currentUser) {
+      dispatch(setLoading(true));
+
       getMessageThreadsForUser(currentUser.uid).then((res) => {
         dispatch(setMessageThreads(res));
       });
@@ -77,6 +80,8 @@ function App() {
   // like if they are online or their photo changes.
   useEffect(() => {
     if (currentUser && messageThreads.length > 0) {
+      dispatch(setLoading(true));
+
       let threadUsers = messageThreads.reduce(
         (prev, cur) => prev.concat(cur.users),
         []
@@ -107,6 +112,8 @@ function App() {
   // Get all messages for all message threads the user is a part of
   useEffect(() => {
     if (currentUser && messageThreads.length > 0) {
+      dispatch(setLoading(true));
+
       getMessages().then((res) => dispatch(setMessages(res)));
     }
     // eslint-disable-next-line

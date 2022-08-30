@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  loading: true,
   usersInfo: [],
   messageThreads: [],
   messages: [],
@@ -14,6 +15,9 @@ export const messagesSlice = createSlice({
   name: 'messages',
   initialState,
   reducers: {
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
     setUsersInfo: (state, action) => {
       state.usersInfo = action.payload;
     },
@@ -71,6 +75,7 @@ export const messagesSlice = createSlice({
 
 // Setters
 export const {
+  setLoading,
   setUsersInfo,
   setMessageThreads,
   setMessages,
@@ -81,6 +86,7 @@ export const {
 } = messagesSlice.actions;
 
 // Selectors
+export const selectLoading = (state) => state.messages.loading;
 export const selectUsersInfo = (state) => state.messages.usersInfo;
 export const selectMessageThreads = (state) => state.messages.messageThreads;
 export const selectMessages = (state) => state.messages.messages;
