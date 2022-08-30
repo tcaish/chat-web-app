@@ -10,10 +10,10 @@ import {
 import { selectUser } from '../../redux/slices/userSlice';
 import EmptyState from '../empty-state/empty-state';
 import MessageListItem from '../message-list-item/message-list-item';
-import SearchBar from '../search-bar/search-bar';
 import { MdFormatListBulleted } from 'react-icons/md';
 import './message-list.scss';
 import MessageListItemPlaceholder from '../message-list-item-placeholder/message-list-item-placeholder';
+import MessageListHeader from '../message-list-header/message-list-header';
 
 function MessageList() {
   const dispatch = useDispatch();
@@ -93,7 +93,7 @@ function MessageList() {
 
   return (
     <div className="message-list-container card-background">
-      <SearchBar />
+      <MessageListHeader />
 
       {loading ? (
         <div className="messages-container">
