@@ -4,14 +4,18 @@ import './empty-state.scss';
 function EmptyState() {
   return (
     <div className="empty-state-container">
-      <div>
-        <MdMessage />
+      <div className="empty-state-icon-container">
+        <span className="gradient-background empty-state-color">
+          <MdMessage />
+        </span>
       </div>
-      <div>
-        <h3>No Conversation to Display</h3>
+
+      <div className="empty-state-title-container">
+        <h3 className="empty-state-color">No Conversation to Display</h3>
       </div>
+
       <div>
-        <p>
+        <p className="empty-state-color">
           Select a message from the left to pick up from a previous conversation
           or start a new one!
         </p>

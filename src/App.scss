@@ -2,6 +2,12 @@
 
 body,
 html {
+  height: 100%;
+  margin: 0;
+  width: 100%;
+}
+
+.gradient-background {
   background: $brand-purple;
   background: -webkit-linear-gradient(
     to right,
@@ -15,9 +21,6 @@ html {
     $brand-blue,
     $brand-purple
   );
-  height: 100%;
-  margin: 0;
-  width: 100%;
 }
 
 .card-background {

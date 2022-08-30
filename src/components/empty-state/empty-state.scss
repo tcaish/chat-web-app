@@ -1,6 +1,24 @@
 .empty-state-container {
   display: flex;
   flex-direction: column;
-  padding-top: 25%;
+  padding: 25% 20px 20px 20px;
   text-align: center;
+
+  .empty-state-color {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .empty-state-icon-container {
+    margin-bottom: 20px;
+
+    span {
+      border-radius: 45px;
+      font-size: 45px;
+      padding: 3px 10px 10px 10px;
+    }
+  }
+
+  .empty-state-title-container {
+    margin-bottom: 5px;
+  }
 }
