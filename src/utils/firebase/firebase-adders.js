@@ -20,3 +20,21 @@ export async function addMessageToMessageThread(messageThreadId, options) {
       return { added: false, error: err.code };
     });
 }
+
+// Adds a new message thread
+export async function addNewMessageThread(userUids) {
+  if (!userUids) return;
+
+  const threadsRef = collection(firestore, 'message_threads');
+  let newMessageThread = { users: userUids, typing: [] };
+
+  try {
+    const docRef = await addDoc(threadsRef, newMessageThread);
+    newMessageThread.id = docRef.id;
+
+    return { added: true, data: newMessageThread, error: '' };
+  } catch (err) {
+    console.log(err);
+    return { added: false, error: err };
+  }
+}

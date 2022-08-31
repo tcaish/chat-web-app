@@ -5,7 +5,6 @@ import {
   query,
   where
 } from 'firebase/firestore';
-import { userConverter } from '../../classes/User';
 import { messageConverter } from '../../classes/Message';
 import { firestore } from './firebase';
 
@@ -43,18 +42,4 @@ export async function getMessageThreadsForUser(userId) {
   });
 
   return messageThreads;
-}
-
-// Returns the user information for all users given
-export async function getUsersForMessageThreads(users) {
-  const usersList = [];
-
-  const usersRef = collection(firestore, 'users').withConverter(userConverter);
-  const q = query(usersRef, where('uid', 'in', users));
-
-  const usersSnapshot = await getDocs(q);
-  usersSnapshot.forEach((doc) => {
-    usersList.push(doc.data());
-  });
-  return usersList;
 }

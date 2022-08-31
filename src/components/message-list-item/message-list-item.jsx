@@ -13,10 +13,12 @@ function MessageListItem(props) {
 
   const selectedMessageThread = useSelector(selectSelectedMessageThread);
 
+  // Setting the user's online status for the message thread that's selected
   useEffect(() => {
-    dispatch(setSelectedMessageUserOnline(props.item.online));
+    if (selectedMessageThread === props.item.id)
+      dispatch(setSelectedMessageUserOnline(props.item.online));
     // eslint-disable-next-line
-  }, [props.item.online]);
+  }, [props.item.online, selectedMessageThread]);
 
   return (
     Object.keys(props.item).length > 0 && (

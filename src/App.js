@@ -30,10 +30,9 @@ import {
 } from './redux/slices/messagesSlice';
 import {
   listenForUserInactive,
-  removeItemFromArray,
   stopListeningForUserInactive
 } from './exports/functions';
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, onSnapshot, query } from 'firebase/firestore';
 import { userConverter } from './classes/User';
 import { editUserOnline } from './utils/firebase/firebase-modifiers';
 
@@ -82,15 +81,15 @@ function App() {
     if (currentUser && messageThreads.length > 0) {
       dispatch(setLoading(true));
 
-      let threadUsers = messageThreads.reduce(
-        (prev, cur) => prev.concat(cur.users),
-        []
-      );
-      threadUsers = removeItemFromArray(threadUsers, currentUser.uid);
+      // let threadUsers = messageThreads.reduce(
+      //   (prev, cur) => prev.concat(cur.users),
+      //   []
+      // );
+      // threadUsers = removeItemFromArray(threadUsers, currentUser.uid);
 
       const q = query(
-        collection(firestore, 'users').withConverter(userConverter),
-        where('uid', 'in', threadUsers)
+        collection(firestore, 'users').withConverter(userConverter)
+        // where('uid', 'in', threadUsers)
       );
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const usersList = [];

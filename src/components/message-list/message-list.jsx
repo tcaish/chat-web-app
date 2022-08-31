@@ -30,8 +30,8 @@ function MessageList() {
   useEffect(() => {
     if (
       messageThreads.length > 0 &&
-      usersInfo.length > 0 &&
-      messages.length > 0
+      usersInfo.length > 0
+      // messages.length > 0
     ) {
       const items = messageThreads.map((m) => {
         // Gets the user that is in the message thread other than current user

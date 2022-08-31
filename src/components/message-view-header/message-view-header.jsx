@@ -11,9 +11,11 @@ function MessageViewHeader({ selectedMessageListItem, totalMessages }) {
     <div className="message-view-header-container">
       <div className="message-image">
         <img src={selectedMessageListItem.photo_url} alt="profile" />
-        <span
-          className={selectedMessageUserOnline ? 'online' : 'offline'}
-        ></span>
+        {selectedMessageUserOnline ? (
+          <span className="online"></span>
+        ) : (
+          <span className="offline"></span>
+        )}
       </div>
       <div className="message-info">
         <span>Conversation with {selectedMessageListItem.display_name}</span>
