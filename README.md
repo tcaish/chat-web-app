@@ -26,6 +26,7 @@ SASS
 
 ### Third-Party
 React Icons - https://react-icons.github.io/react-icons<br/>
+React Select - https://react-select.com/home
 
 ### UI
 Bootstrap - https://react-bootstrap.github.io<br/>
