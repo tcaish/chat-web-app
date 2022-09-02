@@ -101,3 +101,11 @@ export function stopListeningForUserInactive() {
   document.onkeydown = null;
   clearTimeout(time);
 }
+
+// Checks if the user logged in can upload a new profile picture by checking
+// if they are signed in via username/password or a provider.
+export function canUploadNewProfilePicture(user) {
+  if (!user) return;
+
+  return user.providerData[0].providerId === 'password';
+}

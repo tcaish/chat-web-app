@@ -18,9 +18,12 @@ function Message({ message }) {
   useEffect(() => {
     if (usersInfo) {
       const sender = usersInfo.filter((u) => u.uid === message.sender)[0];
-      setDisplayName(sender.display_name);
-      setPhotoURL(sender.photo_url);
-      setIsUsersMessage(sender.uid === user.uid);
+
+      if (sender) {
+        setDisplayName(sender.display_name);
+        setPhotoURL(sender.photo_url);
+        setIsUsersMessage(sender.uid === user.uid);
+      }
     }
   }, [user, message.sender, usersInfo]);
 

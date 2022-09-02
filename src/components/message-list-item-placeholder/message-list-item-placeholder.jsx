@@ -1,3 +1,4 @@
+import { Avatar } from 'evergreen-ui';
 import { Placeholder } from 'react-bootstrap';
 import PlaceholderImg from '../../assets/images/placeholder_img.gif';
 import '../message-list-item/message-list-item.scss';
@@ -8,7 +9,7 @@ function MessageListItemPlaceholder() {
     <li className="message-list-item-container">
       <div className="message-content">
         <div className="message-image">
-          <img src={PlaceholderImg} alt="profile" />
+          <Avatar size={70} referrerPolicy="no-referrer" src={PlaceholderImg} />
         </div>
         <div className="message-info">
           <Placeholder as="p" animation="glow">
