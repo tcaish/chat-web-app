@@ -31,6 +31,7 @@ import { NAVIGATION_PATHS } from '../../exports/contants';
 import './navigation.scss';
 import './navigation.mobile.scss';
 import { editUserOnline } from '../../utils/firebase/firebase-modifiers';
+import UpdateProfilePictureModal from '../modals/update-profile-picture-modal/update-profile-picture-modal';
 
 function Navigation() {
   const navigate = useNavigate();
@@ -40,11 +41,12 @@ function Navigation() {
   const displayName = useSelector(selectDisplayName);
   const photoURL = useSelector(selectPhotoURL);
 
+  const [showModal, setShowModal] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
   // Handles what happens when a dropdown menu item is selected
   function handleDropdownItemSelect(eventKey) {
-    navigate(eventKey);
+    if (eventKey) navigate(eventKey);
     setExpanded(false);
   }
 
@@ -106,12 +108,18 @@ function Navigation() {
                 )}
 
                 {user && (
-                  <NavDropdown.Item
-                    eventKey={NAVIGATION_PATHS.home}
-                    onClick={handleSigningOut}
-                  >
-                    Sign Out
-                  </NavDropdown.Item>
+                  <>
+                    <NavDropdown.Item onClick={() => setShowModal(true)}>
+                      Profile Picture
+                    </NavDropdown.Item>
+
+                    <NavDropdown.Item
+                      eventKey={NAVIGATION_PATHS.home}
+                      onClick={handleSigningOut}
+                    >
+                      Sign Out
+                    </NavDropdown.Item>
+                  </>
                 )}
               </NavDropdown>
             </Nav>
@@ -120,6 +128,13 @@ function Navigation() {
       </Navbar>
 
       <Outlet />
+
+      {showModal && (
+        <UpdateProfilePictureModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
+      )}
       {/* <Footer /> */}
     </Container>
   );
