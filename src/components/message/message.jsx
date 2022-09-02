@@ -32,6 +32,7 @@ function Message({ message }) {
           referrerPolicy="no-referrer"
           name={displayName ? displayName : ''}
           src={photoURL ? photoURL : ''}
+          style={{ backgroundColor: photoURL && 'white' }}
         />
       </div>
 
@@ -57,6 +58,7 @@ function Message({ message }) {
           referrerPolicy="no-referrer"
           name={displayName ? displayName : ''}
           src={photoURL ? photoURL : ''}
+          style={{ backgroundColor: photoURL && 'white' }}
         />
       </div>
     </div>

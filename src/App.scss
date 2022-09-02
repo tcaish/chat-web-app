@@ -43,14 +43,7 @@ html {
     background-color: rgb(228, 0, 0);
   }
 
-  img {
-    background-color: white;
-    border-radius: 35px;
-    height: 70px;
-    width: 70px;
-  }
-
-  span {
+  .online-indicator {
     border: 2.5px solid white;
     border-radius: 50%;
     bottom: 0;

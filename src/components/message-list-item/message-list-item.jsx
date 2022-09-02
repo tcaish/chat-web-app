@@ -1,3 +1,4 @@
+import { Avatar } from 'evergreen-ui';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -33,8 +34,18 @@ function MessageListItem(props) {
       >
         <div className="message-content">
           <div className="message-image">
-            <img src={props.item.photo_url} alt="profile" />
-            <span className={props.item.online ? 'online' : 'offline'}></span>
+            <Avatar
+              size={70}
+              referrerPolicy="no-referrer"
+              name={props.item.display_name ? props.item.display_name : ''}
+              src={props.item.photo_url ? props.item.photo_url : ''}
+              style={{ backgroundColor: props.item.photo_url && 'white' }}
+            />
+            <span
+              className={`online-indicator ${
+                props.item.online ? 'online' : 'offline'
+              }`}
+            ></span>
           </div>
           <div className="message-info">
             <span>{props.item.display_name}</span>
