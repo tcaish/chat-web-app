@@ -80,54 +80,49 @@ function Navigation() {
                 alt="Caish Workshop Logo"
               /> */}
           </Navbar.Brand>
-          <Navbar.Toggle
-            aria-controls="basic-navbar-nav"
-            onClick={() => setExpanded(expanded ? false : 'expanded')}
-          />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              {/* This is needed to keep avatar on right. */}
-            </Nav>
-            <Nav onSelect={handleDropdownItemSelect}>
-              <NavDropdown
-                className="avatar-dropdown-link"
-                title={
-                  <Avatar
-                    size={50}
-                    referrerPolicy="no-referrer"
-                    name={displayName ? displayName : ''}
-                    src={photoURL ? photoURL : ''}
-                    style={{ backgroundColor: !photoURL ? 'white' : 'none' }}
-                  />
-                }
-              >
-                {!user && (
-                  <NavDropdown.Item eventKey={NAVIGATION_PATHS.sign_in}>
-                    Sign In
+
+          <Nav className="me-auto">
+            {/* This is needed to keep avatar on right. */}
+          </Nav>
+          <Nav onSelect={handleDropdownItemSelect}>
+            <NavDropdown
+              className="avatar-dropdown-link"
+              title={
+                <Avatar
+                  size={50}
+                  referrerPolicy="no-referrer"
+                  name={displayName ? displayName : ''}
+                  src={photoURL ? photoURL : ''}
+                  style={{ backgroundColor: !photoURL ? 'white' : 'none' }}
+                />
+              }
+            >
+              {!user && (
+                <NavDropdown.Item eventKey={NAVIGATION_PATHS.sign_in}>
+                  Sign In
+                </NavDropdown.Item>
+              )}
+
+              {user && (
+                <>
+                  <NavDropdown.Item
+                    active={false}
+                    onClick={() => setShowModal(true)}
+                  >
+                    Profile Picture
                   </NavDropdown.Item>
-                )}
 
-                {user && (
-                  <>
-                    <NavDropdown.Item
-                      active={false}
-                      onClick={() => setShowModal(true)}
-                    >
-                      Profile Picture
-                    </NavDropdown.Item>
-
-                    <NavDropdown.Item
-                      active={false}
-                      eventKey={NAVIGATION_PATHS.home}
-                      onClick={handleSigningOut}
-                    >
-                      Sign Out
-                    </NavDropdown.Item>
-                  </>
-                )}
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
+                  <NavDropdown.Item
+                    active={false}
+                    eventKey={NAVIGATION_PATHS.home}
+                    onClick={handleSigningOut}
+                  >
+                    Sign Out
+                  </NavDropdown.Item>
+                </>
+              )}
+            </NavDropdown>
+          </Nav>
         </Container>
       </Navbar>
 
