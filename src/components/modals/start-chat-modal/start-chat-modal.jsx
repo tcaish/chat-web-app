@@ -29,14 +29,16 @@ function StartChatModal({ showModal, setShowModal }) {
   // Sets the options for the select input field
   useEffect(() => {
     if (usersInfo.length > 0) {
-      const tempOptions = usersInfo.map((u) => {
-        if (u.uid === user.uid) return {};
+      const tempOptions = usersInfo.reduce((result, u) => {
+        if (u.uid !== user.uid) {
+          result.push({
+            value: u.uid,
+            label: u.display_name
+          });
+        }
 
-        return {
-          value: u.uid,
-          label: u.display_name
-        };
-      });
+        return result;
+      }, []);
       setOptions(tempOptions);
     }
     // eslint-disable-next-line
