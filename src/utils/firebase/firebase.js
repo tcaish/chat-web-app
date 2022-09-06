@@ -13,13 +13,8 @@ import {
   updateProfile,
   updateEmail
 } from 'firebase/auth';
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc
-} from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -37,8 +32,9 @@ const firebaseApp = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(firebaseApp);
 getAnalytics(firebaseApp);
 
-// Auth
 export const auth = getAuth();
+export const firestore = getFirestore();
+export const storage = getStorage();
 
 // Auth - Google provider
 const googleProvider = new GoogleAuthProvider();
@@ -83,9 +79,6 @@ export const updateUserProfile = (additionalInfo) =>
 // Update the user's email with a new one
 export const updateUserEmail = (email) => updateEmail(auth.currentUser, email);
 
-// Firestore
-export const firestore = getFirestore();
-
 // Adds user to database if not already there
 export async function createUserDocumentFromAuth(
   userAuth,
@@ -125,14 +118,6 @@ export async function createUserDocumentFromAuth(
 //   const cartProductRef = doc(firestore, 'users', userId, 'cart', cartProductId);
 //   return await deleteDoc(cartProductRef);
 // }
-
-// Updates the user with the given options
-export async function updateUser(userId, options) {
-  if (!userId || !options) return;
-
-  const userRef = doc(firestore, 'users', userId);
-  return await updateDoc(userRef, options);
-}
 
 // Removes all items from the user's cart
 // export async function updateAllCartItemsToPurchased(userId) {

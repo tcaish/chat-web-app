@@ -109,3 +109,14 @@ export function canUploadNewProfilePicture(user) {
 
   return user.providerData[0].providerId === 'password';
 }
+
+// Updates a file's file name with the user's UID
+export function updateProfilePictureFileName(userId, file) {
+  const [, fileType] = file.name.split('.');
+  const newFileName = `${userId}.${fileType}`;
+
+  const blob = file.slice(0, file.size, file.type);
+  const newFile = new File([blob], newFileName, { type: file.type });
+
+  return newFile;
+}

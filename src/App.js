@@ -6,7 +6,7 @@ import {
   firestore
 } from './utils/firebase/firebase';
 import './App.scss';
-import { selectUser, setUser } from './redux/slices/userSlice';
+import { selectUser, setPhotoURL, setUser } from './redux/slices/userSlice';
 import { Route, Routes } from 'react-router-dom';
 import { NAVIGATION_PATHS } from './exports/contants';
 import Navigation from './components/navigation/navigation';
@@ -53,6 +53,7 @@ function App() {
         }).then((res) => {
           if (res.type === 'get') editUserOnline(user.uid, true);
         });
+
         dispatch(setUser(user));
         sessionStorage.setItem('Auth Token', user.refreshToken);
       } else {
@@ -69,6 +70,8 @@ function App() {
 
       getMessageThreadsForUser(currentUser.uid).then((res) => {
         dispatch(setMessageThreads(res));
+
+        if (res.length === 0) dispatch(setLoading(false));
       });
     }
     // eslint-disable-next-line
@@ -78,7 +81,7 @@ function App() {
   // the user is a part of and listen for updates to their user information,
   // like if they are online or their photo changes.
   useEffect(() => {
-    if (currentUser && messageThreads.length > 0) {
+    if (currentUser) {
       dispatch(setLoading(true));
 
       // let threadUsers = messageThreads.reduce(
@@ -98,6 +101,13 @@ function App() {
           usersList.push(doc.data());
         });
 
+        // Set current user's photo URL if it has changed
+        querySnapshot.docChanges().forEach((change) => {
+          if (change.type === 'modified' && change.doc.id === currentUser.uid) {
+            dispatch(setPhotoURL(change.doc.data().photo_url));
+          }
+        });
+
         dispatch(setUsersInfo(usersList));
       });
 
@@ -106,7 +116,7 @@ function App() {
       };
     }
     // eslint-disable-next-line
-  }, [currentUser, messageThreads]);
+  }, [currentUser]);
 
   // Get all messages for all message threads the user is a part of
   useEffect(() => {

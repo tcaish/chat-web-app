@@ -52,3 +52,11 @@ export async function editUserOnline(userId, isOnline = false) {
     return null;
   }
 }
+
+// Updates the user with the given options
+export async function updateUser(userId, options) {
+  if (!userId || !options) return;
+
+  const userRef = doc(firestore, 'users', userId);
+  return await updateDoc(userRef, options);
+}

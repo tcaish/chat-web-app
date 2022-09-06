@@ -33,6 +33,7 @@ import '../sign-in/sign-in.scss';
 import './sign-up.scss';
 import { NAVIGATION_PATHS } from '../../exports/contants';
 import Center from '../../components_styled/Center';
+import { updateUser } from '../../utils/firebase/firebase-modifiers';
 
 const defaultFormInput = {
   displayName: '',
@@ -140,23 +141,23 @@ function SignUp() {
       .then((createRes) => {
         let newUser = createRes.user;
 
-        updateUserProfile({
-          displayName: formInput.displayName
-        })
-          .then((updateRes) => {
-            newUser.displayName = formInput.displayName;
-            dispatch(setUser(newUser));
-          })
-          .catch((err) => {
-            toaster.danger('Profile Error', {
-              description: 'We were not able to update your display name.',
-              duration: 7
-            });
+        try {
+          updateUserProfile({
+            displayName: formInput.displayName
           });
+          updateUser(newUser.uid, { display_name: formInput.displayName });
+
+          newUser.displayName = formInput.displayName;
+
+          dispatch(setUser(newUser));
+          setFormInput(defaultFormInput);
+
+          redirectToHomePage();
+        } catch (err) {
+          handleSignUpErrors(err);
+        }
 
         setIsLoading(false);
-        setFormInput(defaultFormInput);
-        redirectToHomePage();
       })
       .catch((err) => {
         setIsLoading(false);
