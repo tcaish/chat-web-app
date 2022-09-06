@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   onAuthStateChangedListener,
@@ -41,6 +41,8 @@ function App() {
 
   const currentUser = useSelector(selectUser);
   const messageThreads = useSelector(selectMessageThreads);
+
+  const [showSideMenu, setShowSideMenu] = useState(false);
 
   // Listens for the user to sign in or out
   useEffect(() => {
@@ -140,7 +142,15 @@ function App() {
 
   return (
     <Routes>
-      <Route path={NAVIGATION_PATHS.home} element={<Navigation />}>
+      <Route
+        path={NAVIGATION_PATHS.home}
+        element={
+          <Navigation
+            showSideMenu={showSideMenu}
+            setShowSideMenu={setShowSideMenu}
+          />
+        }
+      >
         <Route
           index
           element={

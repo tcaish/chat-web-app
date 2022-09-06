@@ -1,2 +1,19 @@
+@import '../../exports/constants.scss';
+
 .home-container {
+  .home-accordion {
+    margin-bottom: 10px;
+
+    --bs-accordion-active-bg: rgb(0, 0, 0, 0.2);
+    --bs-accordion-bg: rgb(0, 0, 0, 0.2);
+    --bs-accordion-border-color: unset;
+
+    .accordion-button {
+      color: $off-white;
+
+      &:not(.collapsed)::after {
+        background-image: var(--bs-accordion-btn-icon);
+      }
+    }
+  }
 }

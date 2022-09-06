@@ -33,7 +33,7 @@ import './navigation.mobile.scss';
 import { editUserOnline } from '../../utils/firebase/firebase-modifiers';
 import UpdateProfilePictureModal from '../modals/update-profile-picture-modal/update-profile-picture-modal';
 
-function Navigation() {
+function Navigation({ showSideMenu, setShowSideMenu }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -134,7 +134,6 @@ function Navigation() {
           setShowModal={setShowModal}
         />
       )}
-      {/* <Footer /> */}
     </Container>
   );
 }
