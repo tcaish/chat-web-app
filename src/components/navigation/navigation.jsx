@@ -109,11 +109,15 @@ function Navigation() {
 
                 {user && (
                   <>
-                    <NavDropdown.Item onClick={() => setShowModal(true)}>
+                    <NavDropdown.Item
+                      active={false}
+                      onClick={() => setShowModal(true)}
+                    >
                       Profile Picture
                     </NavDropdown.Item>
 
                     <NavDropdown.Item
+                      active={false}
                       eventKey={NAVIGATION_PATHS.home}
                       onClick={handleSigningOut}
                     >
