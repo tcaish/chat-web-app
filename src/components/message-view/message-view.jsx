@@ -19,7 +19,7 @@ import './message-view.mobile.scss';
 import EmptyState from '../empty-state/empty-state';
 import { MdMessage } from 'react-icons/md';
 import { showToast } from '../../exports/functions';
-import { TOAST_TYPES } from '../../exports/contants';
+import { TOAST_TYPES, TOTAL_MESSAGES_SENT_LIMIT } from '../../exports/contants';
 import { selectScreenWidth } from '../../redux/slices/screenSlice';
 
 function MessageView() {
@@ -81,6 +81,14 @@ function MessageView() {
   // Sends the message
   async function sendMessage(inputText) {
     if (sendingMessage || !inputText) return;
+    if (totalMessages === TOTAL_MESSAGES_SENT_LIMIT) {
+      showToast(
+        'Message Limit Reached',
+        `Only ${TOTAL_MESSAGES_SENT_LIMIT} messages are allowed in this demo.`,
+        TOAST_TYPES.warning
+      );
+      return;
+    }
 
     setSendingMessage(true);
 

@@ -7,13 +7,7 @@ import { selectUser } from '../../redux/slices/userSlice';
 import { editMessageThreadUsersTyping } from '../../utils/firebase/firebase-modifiers';
 import './message-view-footer.scss';
 
-function MessageViewFooter({
-  messageThreadId,
-  inputText,
-  setInputText,
-  sendMessage,
-  sendingMessage
-}) {
+function MessageViewFooter(props) {
   const user = useSelector(selectUser);
   const selectedMessageUserTyping = useSelector(
     selectSelectedMessageUserTyping
@@ -25,19 +19,19 @@ function MessageViewFooter({
   function handleUserTyping(e) {
     const text = e.target.value;
 
-    setInputText(e.target.value);
+    props.setInputText(e.target.value);
 
     // If there is text in the textarea and we have not updated database yet,
     // update database with user typing
     if (text && !updatedUserTyping) {
       setUpdatedUserTyping(true);
-      editMessageThreadUsersTyping(messageThreadId, user.uid, true);
+      editMessageThreadUsersTyping(props.messageThreadId, user.uid, true);
     }
     // Else if there is no text in the textarea, and we have updated the
     // database, remove typing user from database
     else if (!text && updatedUserTyping) {
       setUpdatedUserTyping(false);
-      editMessageThreadUsersTyping(messageThreadId, user.uid, false);
+      editMessageThreadUsersTyping(props.messageThreadId, user.uid, false);
     }
   }
 
@@ -52,24 +46,25 @@ function MessageViewFooter({
         <Textarea
           className="message-view-footer-input"
           placeholder="Write a message..."
-          disabled={sendingMessage}
-          value={inputText}
+          disabled={props.sendingMessage}
+          value={props.inputText}
+          autoFocus={true}
           onChange={(e) => handleUserTyping(e)}
           onKeyDown={(event) => {
             // Send message when SHIFT + ENTER pressed
             if (event.keyCode === 13 && event.shiftKey) {
               if (event.type === 'keydown') {
-                sendMessage(inputText);
+                props.sendMessage(props.inputText);
               }
             }
           }}
         />
         <div
           className="message-view-footer-send-container"
-          onClick={() => sendMessage(inputText)}
+          onClick={() => props.sendMessage(props.inputText)}
         >
           <span className="send-button">
-            {!sendingMessage ? <IoMdSend /> : <Spinner size={24} />}
+            {!props.sendingMessage ? <IoMdSend /> : <Spinner size={24} />}
           </span>
         </div>
       </div>

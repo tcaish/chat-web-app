@@ -1,3 +1,5 @@
+export const TOTAL_MESSAGES_SENT_LIMIT = 10;
+
 export const NAVIGATION_PATHS = {
   home: '/',
   sign_in: 'sign-in',
