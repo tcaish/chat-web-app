@@ -1,4 +1,5 @@
 import './empty-state.scss';
+import './empty-state.mobile.scss';
 
 function EmptyState({ title, description, icon, containerPadding }) {
   return (
