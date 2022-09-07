@@ -1,0 +1,23 @@
+@media only screen and (max-width: 991px) {
+  .home-container {
+    .home-accordion {
+      .accordion-item {
+        border-radius: 15px;
+
+        .accordion-header {
+          button {
+            border-radius: 15px 15px 0 0;
+          }
+
+          .collapsed {
+            border-radius: 15px;
+          }
+        }
+
+        .accordion-body {
+          padding: 0;
+        }
+      }
+    }
+  }
+}

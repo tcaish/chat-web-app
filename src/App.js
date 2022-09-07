@@ -6,6 +6,7 @@ import {
   firestore
 } from './utils/firebase/firebase';
 import './App.scss';
+import './App.mobile.scss';
 import { selectUser, setPhotoURL, setUser } from './redux/slices/userSlice';
 import { Route, Routes } from 'react-router-dom';
 import { NAVIGATION_PATHS } from './exports/contants';

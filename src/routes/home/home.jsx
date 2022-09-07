@@ -3,6 +3,7 @@ import { Accordion, Col, Row } from 'react-bootstrap';
 import MessageList from '../../components/message-list/message-list';
 import MessageView from '../../components/message-view/message-view';
 import './home.scss';
+import './home.mobile.scss';
 
 function Home() {
   const [screenSize, setScreenSize] = useState(0);

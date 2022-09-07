@@ -1,0 +1,9 @@
+@media only screen and (max-width: 991px) {
+  .message-list-container {
+    border-radius: 0 0 15px 15px;
+
+    .message-list {
+      height: 400px !important;
+    }
+  }
+}

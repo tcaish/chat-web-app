@@ -12,6 +12,7 @@ import EmptyState from '../empty-state/empty-state';
 import MessageListItem from '../message-list-item/message-list-item';
 import { MdFormatListBulleted } from 'react-icons/md';
 import './message-list.scss';
+import './message-list.mobile.scss';
 import MessageListItemPlaceholder from '../message-list-item-placeholder/message-list-item-placeholder';
 import MessageListHeader from '../message-list-header/message-list-header';
 
