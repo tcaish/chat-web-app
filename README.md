@@ -9,6 +9,7 @@ In order to fully try out the website, you'll need to create an account. You can
 
 ### Things I'd Like to Add/Update/Change
 - I would like to add the functionality of listening for new messages on a chat that isn't open and show a notification to the user in the message thread list
+- Search functionality in conversation list
 
 ## Frameworks and Libraries
 ### Backend
