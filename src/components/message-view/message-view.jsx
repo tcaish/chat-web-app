@@ -20,6 +20,7 @@ import EmptyState from '../empty-state/empty-state';
 import { MdMessage } from 'react-icons/md';
 import { showToast } from '../../exports/functions';
 import { TOAST_TYPES } from '../../exports/contants';
+import { selectScreenWidth } from '../../redux/slices/screenSlice';
 
 function MessageView() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function MessageView() {
   const user = useSelector(selectUser);
   const selectedMessageListItem = useSelector(selectSelectedMessageListItem);
   const messages = useSelector(selectMessages);
+  const screenWidth = useSelector(selectScreenWidth);
 
   const [inputText, setInputText] = useState('');
   const [sendingMessage, setSendingMessage] = useState(false);
@@ -131,9 +133,9 @@ function MessageView() {
       ) : (
         <EmptyState
           title={'No Conversation to Display'}
-          description={
-            'Select a message from the left to pick up from a previous conversation or start a new one!'
-          }
+          description={`Select a message from ${
+            screenWidth <= 991 ? 'above' : 'the left'
+          } to pick up from a previous conversation or start a new one!`}
           icon={<MdMessage />}
           containerPadding={{ padding: '25% 20px 20px 20px' }}
         />
