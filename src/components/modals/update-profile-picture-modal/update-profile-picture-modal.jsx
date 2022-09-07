@@ -2,6 +2,7 @@ import { Dialog, Pane, toaster } from 'evergreen-ui';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { canUploadNewProfilePicture } from '../../../exports/functions';
+import { selectScreenWidth } from '../../../redux/slices/screenSlice';
 import { selectUser, setPhotoURL } from '../../../redux/slices/userSlice';
 import { uploadProfilePicture } from '../../../utils/firebase/firebase-adders';
 import FileUploaderSingleUploadDemo from '../../file-uploader/file-uploader';
@@ -11,6 +12,7 @@ function UpdateProfilePictureModal({ showModal, setShowModal }) {
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
+  const screenWidth = useSelector(selectScreenWidth);
 
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -44,6 +46,7 @@ function UpdateProfilePictureModal({ showModal, setShowModal }) {
   return (
     <Pane>
       <Dialog
+        topOffset={screenWidth <= 991 ? 115 : 150}
         isShown={showModal}
         title="Upload New Profile Picture"
         onCloseComplete={() => setShowModal(false)}

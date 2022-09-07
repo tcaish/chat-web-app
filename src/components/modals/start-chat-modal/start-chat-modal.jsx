@@ -13,6 +13,7 @@ import {
 } from '../../../redux/slices/messagesSlice';
 import { selectUser } from '../../../redux/slices/userSlice';
 import { addNewMessageThread } from '../../../utils/firebase/firebase-adders';
+import { selectScreenWidth } from '../../../redux/slices/screenSlice';
 
 function StartChatModal({ showModal, setShowModal }) {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function StartChatModal({ showModal, setShowModal }) {
   const user = useSelector(selectUser);
   const usersInfo = useSelector(selectUsersInfo);
   const messageThreads = useSelector(selectMessageThreads);
+  const screenWidth = useSelector(selectScreenWidth);
 
   const [searchInputValue, setSearchInputValue] = useState('');
   const [selectedOption, setSelectedOption] = useState(null);
@@ -110,6 +112,7 @@ function StartChatModal({ showModal, setShowModal }) {
   return (
     <Pane>
       <Dialog
+        topOffset={screenWidth <= 991 ? 115 : 150}
         minHeightContent={230}
         isShown={showModal}
         title="Start a New Conversation"

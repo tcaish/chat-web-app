@@ -2,22 +2,31 @@ import { useEffect, useState } from 'react';
 import { Accordion, Col, Row } from 'react-bootstrap';
 import MessageList from '../../components/message-list/message-list';
 import MessageView from '../../components/message-view/message-view';
+import {
+  selectScreenWidth,
+  setScreenWidth
+} from '../../redux/slices/screenSlice';
 import './home.scss';
 import './home.mobile.scss';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Home() {
-  const [screenSize, setScreenSize] = useState(0);
+  const dispatch = useDispatch();
+
+  const screenWidth = useSelector(selectScreenWidth);
+
   const [activeKey, setActiveKey] = useState('-1');
 
   useEffect(() => {
     window.onresize = () => {
-      setScreenSize(window.innerWidth);
+      dispatch(setScreenWidth(window.innerWidth));
     };
+    // eslint-disable-next-line
   }, []);
 
   return (
     <div className="home-container">
-      {screenSize > 991 ? (
+      {screenWidth > 991 ? (
         <Row>
           <Col lg={4}>
             <MessageList />
