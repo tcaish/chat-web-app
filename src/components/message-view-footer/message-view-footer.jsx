@@ -38,9 +38,10 @@ function MessageViewFooter(props) {
   return (
     <div className="message-view-footer-container">
       <div className="message-view-footer-typing-container  message-view-footer-text">
-        {selectedMessageUserTyping && (
-          <p>{selectedMessageUserTyping} is typing...</p>
-        )}
+        <p>
+          {selectedMessageUserTyping &&
+            `${selectedMessageUserTyping} is typing...`}
+        </p>
       </div>
       <div className="message-view-footer-input-container">
         <Textarea
@@ -55,13 +56,17 @@ function MessageViewFooter(props) {
             if (event.keyCode === 13 && event.shiftKey) {
               if (event.type === 'keydown') {
                 props.sendMessage(props.inputText);
+                setUpdatedUserTyping(false);
               }
             }
           }}
         />
         <div
           className="message-view-footer-send-container"
-          onClick={() => props.sendMessage(props.inputText)}
+          onClick={() => {
+            props.sendMessage(props.inputText);
+            setUpdatedUserTyping(false);
+          }}
         >
           <span className="send-button">
             {!props.sendingMessage ? <IoMdSend /> : <Spinner size={24} />}
