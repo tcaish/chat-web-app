@@ -7,6 +7,7 @@ import './home.mobile.scss';
 
 function Home() {
   const [screenSize, setScreenSize] = useState(0);
+  const [activeKey, setActiveKey] = useState('-1');
 
   useEffect(() => {
     window.onresize = () => {
@@ -27,11 +28,14 @@ function Home() {
         </Row>
       ) : (
         <>
-          <Accordion className="home-accordion">
-            <Accordion.Item eventKey="0">
+          <Accordion className="home-accordion" activeKey={activeKey}>
+            <Accordion.Item
+              eventKey="0"
+              onClick={() => setActiveKey(activeKey === '0' ? '-1' : '0')}
+            >
               <Accordion.Header>My Conversations</Accordion.Header>
               <Accordion.Body>
-                <MessageList />
+                <MessageList setActiveKey={setActiveKey} />
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>

@@ -30,6 +30,7 @@ function MessageListItem(props) {
         onClick={() => {
           dispatch(setSelectedMessageThread(props.item.id));
           dispatch(setSelectedMessageListItem(props.item));
+          props.setActiveKey('-1');
         }}
       >
         <div className="message-content">

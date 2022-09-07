@@ -16,7 +16,7 @@ import './message-list.mobile.scss';
 import MessageListItemPlaceholder from '../message-list-item-placeholder/message-list-item-placeholder';
 import MessageListHeader from '../message-list-header/message-list-header';
 
-function MessageList() {
+function MessageList({ setActiveKey }) {
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
@@ -78,7 +78,12 @@ function MessageList() {
       <div className="messages-container">
         <ul className="message-list">
           {messageListItems.map((item, index) => (
-            <MessageListItem key={index} index={index} item={item} />
+            <MessageListItem
+              key={index}
+              index={index}
+              item={item}
+              setActiveKey={setActiveKey}
+            />
           ))}
         </ul>
       </div>
