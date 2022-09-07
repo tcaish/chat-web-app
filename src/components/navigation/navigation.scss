@@ -3,6 +3,11 @@
 
   .navbar-brand {
     cursor: pointer;
+
+    .navbar-logo {
+      height: auto;
+      width: 160px;
+    }
   }
 
   .avatar-dropdown-link > .dropdown-toggle::after {

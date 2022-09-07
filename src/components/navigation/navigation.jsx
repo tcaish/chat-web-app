@@ -1,37 +1,21 @@
-// React
 import { useState } from 'react';
-
-// React Router
 import { Outlet, useNavigate } from 'react-router-dom';
-
-// React Redux
 import { useDispatch, useSelector } from 'react-redux';
-
-// Bootstrap
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-
-// Evergreen
 import { Avatar } from 'evergreen-ui';
-
-// Firebase
 import { signOutUser } from '../../utils/firebase/firebase';
-
-// Slices
 import {
   selectUser,
   selectDisplayName,
   selectPhotoURL,
   setUser
 } from '../../redux/slices/userSlice';
-
-// Exports
 import { NAVIGATION_PATHS } from '../../exports/contants';
-
-// Styles
 import './navigation.scss';
 import './navigation.mobile.scss';
 import { editUserOnline } from '../../utils/firebase/firebase-modifiers';
 import UpdateProfilePictureModal from '../modals/update-profile-picture-modal/update-profile-picture-modal';
+import Logo from '../../assets/images/logo.png';
 
 function Navigation({ showSideMenu, setShowSideMenu }) {
   const navigate = useNavigate();
@@ -74,11 +58,11 @@ function Navigation({ showSideMenu, setShowSideMenu }) {
               navigate(NAVIGATION_PATHS.home);
             }}
           >
-            Chat Web App
-            {/* <img
-                className="navbar-logo d-inline-block align-top"
-                alt="Caish Workshop Logo"
-              /> */}
+            <img
+              className="navbar-logo d-inline-block align-top"
+              alt="Chat Web App"
+              src={Logo}
+            />
           </Navbar.Brand>
 
           <Nav className="me-auto">
