@@ -1,11 +1,17 @@
-# Chat Web App - A React Chat Web Application
+# Caish Chat Web App - A React Chat Web Application
+This is a fully functional real-time chat web application. Real-time features include:
+- Sending and receiving messages
+- Viewing someone's online/offline status if a conversation has been started
+- Seeing when the other person is typing
+- Ability to change profile picture if not logged in via a provider
+
+There is a limit of 10 total messages that can be sent by each person since this is a demo and not a production application.
 
 ## Demo
-Update the link here
-[https://caishworkshop.netlify.app](https://caishworkshop.netlify.app)
+[https://caish-chat-web-app.netlify.app](https://caish-chat-web-app.netlify.app)
 
 ### Testing strategy
-In order to fully try out the website, you'll need to create an account. You can search for "Test Dummy" to test out sending messages in a conversation, but if you would like to see what it's like to send a receive messages with another person, have someone else create a new account and start a conversation with you.
+In order to fully try out the website, you'll need to create an account. You can search for "Test User" to test out sending messages in a conversation, but if you would like to see what it's like to send and receive messages with another person, have someone else create an account and start a conversation with you.
 
 ### Things I'd Like to Add/Update/Change
 - I would like to add the functionality of listening for new messages on a chat that isn't open and show a notification to the user in the message thread list
@@ -30,7 +36,8 @@ SASS
 
 ### Third-Party
 React Icons - https://react-icons.github.io/react-icons<br/>
-React Select - https://react-select.com/home
+React Select - https://react-select.com/home<br/>
+Styled Components - https://styled-components.com/
 
 ### UI
 Bootstrap - https://react-bootstrap.github.io<br/>
