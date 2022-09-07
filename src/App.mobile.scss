@@ -3,4 +3,11 @@
     min-height: 250px;
     padding-bottom: 10px;
   }
+
+  // This puts the toasts above the navigation bar and everything else
+  div[data-evergreen-toaster-container] {
+    span:first-of-type {
+      z-index: 1021;
+    }
+  }
 }
