@@ -38,11 +38,12 @@ function Home() {
       ) : (
         <>
           <Accordion className="home-accordion" activeKey={activeKey}>
-            <Accordion.Item
-              eventKey="0"
-              onClick={() => setActiveKey(activeKey === '0' ? '-1' : '0')}
-            >
-              <Accordion.Header>My Conversations</Accordion.Header>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header
+                onClick={() => setActiveKey(activeKey === '0' ? '-1' : '0')}
+              >
+                My Conversations
+              </Accordion.Header>
               <Accordion.Body>
                 <MessageList setActiveKey={setActiveKey} />
               </Accordion.Body>
