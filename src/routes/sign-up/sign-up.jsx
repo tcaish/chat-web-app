@@ -12,7 +12,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
 
 // Evergreen
-import { Button, IconButton, TextInputField, toaster } from 'evergreen-ui';
+import { Button, IconButton, TextInputField } from 'evergreen-ui';
 
 // Firebase
 import {
@@ -26,12 +26,12 @@ import {
 import { setUser } from '../../redux/slices/userSlice';
 
 // Functions
-import { handleSignInUpErrors } from '../../exports/functions';
+import { handleSignInUpErrors, showToast } from '../../exports/functions';
 
 // Styles
 import '../sign-in/sign-in.scss';
 import './sign-up.scss';
-import { NAVIGATION_PATHS } from '../../exports/contants';
+import { NAVIGATION_PATHS, TOAST_TYPES } from '../../exports/contants';
 import Center from '../../components_styled/Center';
 import { updateUser } from '../../utils/firebase/firebase-modifiers';
 
@@ -63,10 +63,7 @@ function SignUp() {
     let title = 'Error Signing Up';
     const description = handleSignInUpErrors(err);
 
-    toaster.danger(title, {
-      description,
-      duration: 7
-    });
+    showToast(title, description, TOAST_TYPES.danger);
   }
 
   // Shows the confirm password helper text
@@ -125,10 +122,11 @@ function SignUp() {
     }
 
     if (formInput.password !== formInput.confirmPassword) {
-      toaster.danger('Password Error', {
-        description: 'Your passwords do not match.',
-        duration: 7
-      });
+      showToast(
+        'Password Error',
+        'Your passwords do not match.',
+        TOAST_TYPES.danger
+      );
       return;
     }
 

@@ -1,4 +1,3 @@
-import { toaster } from 'evergreen-ui';
 import { collection, onSnapshot, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +18,8 @@ import './message-view.scss';
 import './message-view.mobile.scss';
 import EmptyState from '../empty-state/empty-state';
 import { MdMessage } from 'react-icons/md';
+import { showToast } from '../../exports/functions';
+import { TOAST_TYPES } from '../../exports/contants';
 
 function MessageView() {
   const dispatch = useDispatch();
@@ -94,16 +95,15 @@ function MessageView() {
 
       if (res.added) {
         setInputText('');
-        toaster.success('Message Sent', {
-          duration: 4
-        });
+        showToast('Message Sent');
 
         editMessageThreadUsersTyping(messageThreadId, user.uid, false);
       } else {
-        toaster.danger('Message Failed to Send', {
-          description: res.error,
-          duration: 7
-        });
+        showToast(
+          'Message Failed to Send',
+          'There was an error sending your message. Try again later!',
+          TOAST_TYPES.danger
+        );
       }
     });
   }

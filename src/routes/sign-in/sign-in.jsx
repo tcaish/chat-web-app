@@ -9,7 +9,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
 
 // Evergreen
-import { Button, IconButton, TextInputField, toaster } from 'evergreen-ui';
+import { Button, IconButton, TextInputField } from 'evergreen-ui';
 
 // Firebase
 import {
@@ -19,8 +19,8 @@ import {
 } from '../../utils/firebase/firebase';
 
 // Exports
-import { handleSignInUpErrors } from '../../exports/functions';
-import { NAVIGATION_PATHS } from '../../exports/contants';
+import { handleSignInUpErrors, showToast } from '../../exports/functions';
+import { NAVIGATION_PATHS, TOAST_TYPES } from '../../exports/contants';
 
 // Styles
 import './sign-in.scss';
@@ -46,10 +46,7 @@ function SignIn() {
     let title = 'Error Signing In';
     const description = handleSignInUpErrors(err);
 
-    toaster.danger(title, {
-      description,
-      duration: 7
-    });
+    showToast(title, description, TOAST_TYPES.danger);
   }
 
   // Redirects user to home page

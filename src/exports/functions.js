@@ -1,5 +1,7 @@
+import { toaster } from 'evergreen-ui';
 import { Timestamp } from 'firebase/firestore';
 import { editUserOnline } from '../utils/firebase/firebase-modifiers';
+import { TOAST_TYPES } from './contants';
 
 // Signing in and out
 export function handleSignInUpErrors(err) {
@@ -119,4 +121,19 @@ export function updateProfilePictureFileName(userId, file) {
   const newFile = new File([blob], newFileName, { type: file.type });
 
   return newFile;
+}
+
+// Shows a toast given all information
+export function showToast(
+  title,
+  description = '',
+  toastType = TOAST_TYPES.success
+) {
+  if (toastType === TOAST_TYPES.success) {
+    toaster.success(title, { description, duration: 4 });
+  } else if (toastType === TOAST_TYPES.danger) {
+    toaster.danger(title, { description, duration: 7 });
+  } else if (toastType === TOAST_TYPES.warning) {
+    toaster.warning(title, { description, duration: 7 });
+  }
 }

@@ -1,4 +1,4 @@
-import { Dialog, Pane, toaster } from 'evergreen-ui';
+import { Dialog, Pane } from 'evergreen-ui';
 import Select from 'react-select';
 import { useEffect, useState } from 'react';
 import './start-chat-modal.scss';
@@ -14,6 +14,8 @@ import {
 import { selectUser } from '../../../redux/slices/userSlice';
 import { addNewMessageThread } from '../../../utils/firebase/firebase-adders';
 import { selectScreenWidth } from '../../../redux/slices/screenSlice';
+import { showToast } from '../../../exports/functions';
+import { TOAST_TYPES } from '../../../exports/contants';
 
 function StartChatModal({ showModal, setShowModal }) {
   const dispatch = useDispatch();
@@ -51,9 +53,11 @@ function StartChatModal({ showModal, setShowModal }) {
     if (!selectedOption) return;
 
     if (isMessageThreadAlreadyCreated()) {
-      toaster.warning(`Chat Already Started with ${selectedOption.label}`, {
-        duration: 7
-      });
+      showToast(
+        `Chat Already Started with ${selectedOption.label}`,
+        '',
+        TOAST_TYPES.warning
+      );
       return;
     }
 
@@ -81,16 +85,15 @@ function StartChatModal({ showModal, setShowModal }) {
           })
         );
 
-        toaster.success(`Chat Started with ${selectedOption.label}`, {
-          duration: 4
-        });
+        showToast(`Chat Started with ${selectedOption.label}`);
 
         setShowModal(false);
       } else {
-        toaster.danger('Failed to Start Chat', {
-          description: `There was an error starting a chat with ${selectedOption.label}. Please try again later!`,
-          duration: 7
-        });
+        showToast(
+          'Failed to Start Chat',
+          `There was an error starting a chat with ${selectedOption.label}. Please try again later!`,
+          TOAST_TYPES.danger
+        );
       }
 
       setLoading(false);

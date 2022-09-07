@@ -1,7 +1,11 @@
-import { Dialog, Pane, toaster } from 'evergreen-ui';
+import { Dialog, Pane } from 'evergreen-ui';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { canUploadNewProfilePicture } from '../../../exports/functions';
+import { TOAST_TYPES } from '../../../exports/contants';
+import {
+  canUploadNewProfilePicture,
+  showToast
+} from '../../../exports/functions';
 import { selectScreenWidth } from '../../../redux/slices/screenSlice';
 import { selectUser, setPhotoURL } from '../../../redux/slices/userSlice';
 import { uploadProfilePicture } from '../../../utils/firebase/firebase-adders';
@@ -28,15 +32,13 @@ function UpdateProfilePictureModal({ showModal, setShowModal }) {
         dispatch(setPhotoURL(res.url));
         setShowModal(false);
 
-        toaster.success('Profile Picture Updated', {
-          duration: 4
-        });
+        showToast('Profile Picture Updated');
       } else {
-        toaster.danger('Upload Failed', {
-          description:
-            'There was an error updating your profile picture. Try again later!',
-          duration: 7
-        });
+        showToast(
+          'Upload Failed',
+          'There was an error updating your profile picture. Try again later!',
+          TOAST_TYPES.danger
+        );
       }
 
       setLoading(false);
