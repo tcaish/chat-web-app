@@ -130,6 +130,15 @@ function SignUp() {
       return;
     }
 
+    if (formInput.displayName.split(' ').length <= 1) {
+      showToast(
+        'Full Name Error',
+        'Please enter a first and last name for your full name.',
+        TOAST_TYPES.danger
+      );
+      return;
+    }
+
     setIsLoading(true);
 
     await createAuthUserWithEmailAndPassword(
