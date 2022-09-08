@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { IoMdSend } from 'react-icons/io';
 import { useSelector } from 'react-redux';
 import { selectSelectedMessageUserTyping } from '../../redux/slices/messagesSlice';
+import { selectScreenWidth } from '../../redux/slices/screenSlice';
 import { selectUser } from '../../redux/slices/userSlice';
 import { editMessageThreadUsersTyping } from '../../utils/firebase/firebase-modifiers';
 import './message-view-footer.scss';
@@ -12,6 +13,7 @@ function MessageViewFooter(props) {
   const selectedMessageUserTyping = useSelector(
     selectSelectedMessageUserTyping
   );
+  const screenWidth = useSelector(selectScreenWidth);
 
   const [updatedUserTyping, setUpdatedUserTyping] = useState(false);
 
@@ -75,14 +77,18 @@ function MessageViewFooter(props) {
       </div>
       <div className="message-view-footer-message-container message-view-footer-text">
         <p>
-          <Badge color="neutral" marginRight={6}>
-            Shift
-          </Badge>
-          +
-          <Badge color="neutral" marginLeft={6} marginRight={6}>
-            Enter
-          </Badge>
-          to send message
+          {screenWidth > 991 && (
+            <>
+              <Badge color="neutral" marginRight={6}>
+                Shift
+              </Badge>
+              +
+              <Badge color="neutral" marginLeft={6} marginRight={6}>
+                Enter
+              </Badge>
+              to send message
+            </>
+          )}
         </p>
       </div>
     </div>
