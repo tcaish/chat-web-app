@@ -1,7 +1,9 @@
 import { toaster } from 'evergreen-ui';
 import { Timestamp } from 'firebase/firestore';
 import { editUserOnline } from '../utils/firebase/firebase-modifiers';
-import { TOAST_TYPES } from './contants';
+import { SOUND_TYPES, TOAST_TYPES } from './contants';
+import ReceivedSound from '../assets/sounds/received.mp3';
+import SentSound from '../assets/sounds/sent.mp3';
 
 // Signing in and out
 export function handleSignInUpErrors(err) {
@@ -136,4 +138,29 @@ export function showToast(
   } else if (toastType === TOAST_TYPES.warning) {
     toaster.warning(title, { description, duration: 7 });
   }
+}
+
+// Plays a sound based on the given sound type
+export function playSound(soundType) {
+  let audio;
+
+  if (soundType === SOUND_TYPES.sent) {
+    audio = new Audio(SentSound);
+  } else if (soundType === SOUND_TYPES.receive) {
+    audio = new Audio(ReceivedSound);
+  }
+
+  audio.play();
+}
+
+// Check if a message has been sent within the past 5 seconds and is not from
+// the current user.
+export function isMessageNewFromRecipient(messageObj, userId) {
+  if (!messageObj || !userId) return;
+
+  const now = new Date().getTime();
+  const sent = messageObj.sent_at.toDate();
+  const fiveSeconds = 5000;
+
+  return now - sent <= fiveSeconds && messageObj.sender !== userId;
 }

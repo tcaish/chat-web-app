@@ -1,4 +1,4 @@
-import { collection, onSnapshot, query } from 'firebase/firestore';
+import { collection, doc, onSnapshot, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { messageConverter } from '../../classes/Message';
@@ -18,8 +18,16 @@ import './message-view.scss';
 import './message-view.mobile.scss';
 import EmptyState from '../empty-state/empty-state';
 import { MdMessage } from 'react-icons/md';
-import { showToast } from '../../exports/functions';
-import { TOAST_TYPES, TOTAL_MESSAGES_SENT_LIMIT } from '../../exports/contants';
+import {
+  isMessageNewFromRecipient,
+  playSound,
+  showToast
+} from '../../exports/functions';
+import {
+  SOUND_TYPES,
+  TOAST_TYPES,
+  TOTAL_MESSAGES_SENT_LIMIT
+} from '../../exports/contants';
 import { selectScreenWidth } from '../../redux/slices/screenSlice';
 
 function MessageView() {
@@ -68,6 +76,10 @@ function MessageView() {
 
           const newMessages = [...messages, data];
           dispatch(setMessages(newMessages));
+
+          if (isMessageNewFromRecipient(data, user.uid)) {
+            playSound(SOUND_TYPES.receive);
+          }
         }
       });
     });
@@ -105,7 +117,9 @@ function MessageView() {
 
       if (res.added) {
         setInputText('');
+
         showToast('Message Sent');
+        playSound(SOUND_TYPES.sent);
 
         editMessageThreadUsersTyping(messageThreadId, user.uid, false);
       } else {

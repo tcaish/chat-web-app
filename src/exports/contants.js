@@ -11,3 +11,8 @@ export const TOAST_TYPES = {
   success: 'success',
   warning: 'warning'
 };
+
+export const SOUND_TYPES = {
+  receive: 'receive',
+  sent: 'sent'
+};
