@@ -133,6 +133,7 @@ function StartChatModal({ showModal, setShowModal }) {
         <p>Search for a user to start a new conversation below:</p>
 
         <Select
+          autoFocus={true}
           openMenuOnClick={false}
           placeholder="Search for a user..."
           maxMenuHeight={150}
