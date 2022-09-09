@@ -8,7 +8,7 @@ import {
 import './App.scss';
 import './App.mobile.scss';
 import { selectUser, setPhotoURL, setUser } from './redux/slices/userSlice';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { NAVIGATION_PATHS } from './exports/contants';
 import Navigation from './components/navigation/navigation';
 import Home from './routes/home/home';
@@ -170,7 +170,7 @@ function App() {
           }
         />
         <Route path={NAVIGATION_PATHS.sign_up} element={<SignUp />} />
-        <Route path="*" element={<div>Empty</div>} />
+        <Route path="*" element={<Navigate to={NAVIGATION_PATHS.home} />} />
       </Route>
     </Routes>
   );
