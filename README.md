@@ -1,4 +1,4 @@
-# Caish Chat Web App - A React Chat Website
+# Caish Chat - A React Chat Web Application
 This is a fully functional real-time chat web application. Real-time features include:
 - Sending and receiving messages
 - Viewing someone's online/offline status if a conversation has been started
