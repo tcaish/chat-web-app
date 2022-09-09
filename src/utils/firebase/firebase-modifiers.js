@@ -43,6 +43,7 @@ export async function editUserOnline(userId, isOnline = false) {
 
   try {
     return await updateDoc(userRef, {
+      last_online: new Date(),
       online: isOnline
     })
       .then((res) => true)

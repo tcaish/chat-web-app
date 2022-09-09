@@ -1,6 +1,7 @@
 import { Avatar } from 'evergreen-ui';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { timeSince } from '../../exports/functions';
 import {
   selectSelectedMessageThread,
   setSelectedMessageListItem,
@@ -16,10 +17,19 @@ function MessageListItem(props) {
 
   // Setting the user's online status for the message thread that's selected
   useEffect(() => {
-    if (selectedMessageThread === props.item.id)
+    if (selectedMessageThread === props.item.id) {
       dispatch(setSelectedMessageUserOnline(props.item.online));
+      getLastOnlineText();
+    }
     // eslint-disable-next-line
   }, [props.item.online, selectedMessageThread]);
+
+  // Returns the text to show how long it's been since the user was last online
+  function getLastOnlineText() {
+    const lastOnlineDate = props.item.last_online.toDate();
+    const howLongAgoText = timeSince(lastOnlineDate);
+    return `Last online ${howLongAgoText} ago`;
+  }
 
   return (
     Object.keys(props.item).length > 0 && (
@@ -51,8 +61,13 @@ function MessageListItem(props) {
           <div className="message-info">
             <span>{props.item.display_name}</span>
             <p className="sub-text">
-              {props.item.display_name && props.item.display_name.split(' ')[0]}{' '}
-              is {props.item.online ? 'online' : 'offline'}
+              {props.item.online
+                ? `${
+                    props.item.display_name &&
+                    props.item.display_name.split(' ')[0]
+                  }
+              is online`
+                : getLastOnlineText()}
             </p>
             <p className="message-text">{props.item.last_message}</p>
           </div>

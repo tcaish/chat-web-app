@@ -50,6 +50,7 @@ function App() {
     onAuthStateChangedListener((user) => {
       if (user) {
         createUserDocumentFromAuth(user, {
+          last_online: new Date(),
           online: true,
           photo_url: user.photoURL ? user.photoURL : '',
           uid: user.uid

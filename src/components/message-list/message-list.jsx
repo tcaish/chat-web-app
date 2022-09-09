@@ -56,6 +56,7 @@ function MessageList({ setActiveKey }) {
             id: m.id,
             last_message:
               sortedMessages.length > 0 ? sortedMessages[0].message : '',
+            last_online: otherUser.last_online,
             messages: threadMessages,
             online: otherUser.online,
             photo_url: otherUser.photo_url,
