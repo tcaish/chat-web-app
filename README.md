@@ -8,7 +8,7 @@ This is a fully functional real-time chat web application. Real-time features in
 There is a limit of 10 total messages that can be sent by each person since this is a demo and not a production application.
 
 ## Demo
-[https://caish-chat-web-app.netlify.app](https://caish-chat-web-app.netlify.app)
+[https://caish-chat.netlify.app](https://caish-chat.netlify.app)
 
 ### Testing strategy
 In order to fully try out the website, you'll need to create an account. You can search for "Test User" to test out sending messages in a conversation, but if you would like to see what it's like to send and receive messages with another person, have someone else create an account and start a conversation with you.
