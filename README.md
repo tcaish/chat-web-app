@@ -14,8 +14,9 @@ There is a limit of 10 total messages that can be sent by each person since this
 In order to fully try out the website, you'll need to create an account. You can search for "Test User" to test out sending messages in a conversation, but if you would like to see what it's like to send and receive messages with another person, have someone else create an account and start a conversation with you.
 
 ### Things I'd Like to Add/Update/Change
-- I would like to add the functionality of listening for new messages on a chat that isn't open and show a notification to the user in the message thread list
-- Search functionality in conversation list
+- Add the functionality of listening for new messages on a chat that isn't open and show a notification to the user in the message thread list
+- Add the Search functionality in conversation list
+- Update how the user's profile picture is updated so that the user's picture changes when a conversation is open
 
 ## Frameworks and Libraries
 ### Backend
