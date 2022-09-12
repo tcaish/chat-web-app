@@ -17,6 +17,7 @@ In order to fully try out the website, you'll need to create an account. You can
 - Add the functionality of listening for new messages on a chat that isn't open and show a notification to the user in the message thread list
 - Add the Search functionality in conversation list
 - Update how the user's profile picture is updated so that the user's picture changes when a conversation is open
+- Make the look and feel on mobile/iPad better
 
 ## Frameworks and Libraries
 ### Backend
